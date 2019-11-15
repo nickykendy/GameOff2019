@@ -1,11 +1,15 @@
 extends KinematicBody2D
 
+
+const P_SPEED = 200
+const T_SPEED = 250
+const JUMP_POWER = -400
+const GRAV = 15
+const PLATFORM = Vector2(0, -1)
+const TOPDOWN = Vector2(0, 0)
+
 var is_platform = false
-var top_down_spd = 100
-var platform_spd = 200
-var jump_height = 1000
-var gravity = 200
-var is_in_air = false
+var velocity = Vector2()
 
 
 func _ready():
@@ -16,12 +20,12 @@ func get_input():
 	var _left = Input.is_action_pressed("move_left")
 	var _up = Input.is_action_pressed("move_up")
 	var _down = Input.is_action_pressed("move_down")
-	var _jump = Input.is_action_just_pressed("jump")
+	
+	var _jump = Input.is_action_pressed("jump")
 	var _grab = Input.is_action_pressed("grab")
 	var _interact = Input.is_action_just_pressed("interact")
 	var _switch = Input.is_action_just_pressed("switch")
 	
-	var input_vec = Vector2()
 	
 	if is_platform:
 		if _switch:
@@ -31,29 +35,19 @@ func get_input():
 			is_platform = true
 	
 	if is_platform:
-		if _right:
-			input_vec.x += 1
-		if _left:
-			input_vec.x -= 1
-		if _jump and is_on_floor():
-			input_vec.y -= 1
-		if !is_on_floor():
-			input_vec.y += 1
+		velocity.x = (int(_right) - int(_left)) * P_SPEED
+		if is_on_floor() and _jump:
+			velocity.y = JUMP_POWER
+		else:
+			velocity.y += GRAV
 	else:
-		if _right:
-			input_vec.x += 1
-		if _left:
-			input_vec.x -= 1
-		if _up:
-			input_vec.y -= 1
-		if _down:
-			input_vec.y += 1
-	
-	return input_vec.normalized()
+		velocity.x = int(_right) - int(_left)
+		velocity.y = int(_down) - int(_up)
+		velocity = velocity.normalized() * T_SPEED
 
 func _physics_process(delta):
-	var motion = get_input()
+	get_input()
 	if is_platform:
-		move_and_slide(motion * platform_spd, Vector2(0, 1))
+		velocity = move_and_slide(velocity, PLATFORM)
 	else:
-		move_and_slide(motion * top_down_spd, Vector2(0, 0))
+		move_and_slide(velocity, TOPDOWN)
