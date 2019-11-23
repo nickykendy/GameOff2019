@@ -1,25 +1,34 @@
 extends KinematicBody2D
 
 # platform move spped
-const P_SPD = 200
+const P_SPD = 120
 # topdown move speed
-const T_SPD = 250
+const T_SPD = 150
 # move speed when grabbing a platform
-const G_SPD = 120
+const G_SPD = 100
 const JUMP_PWR = -400
 const GRAV = 15
 const PLATFORM = Vector2(0, -1)
 const TOPDOWN = Vector2(0, 0)
+const RIGHT = 270
+const UP = 180
+const LEFT = 90
+const DOWN = 0
 
 var isPlatform = false
 var velocity = Vector2()
 var isGrabbed = false
+var state = "Idle"
+var dir = "Right"
 
 onready var grabDetect = $GrabDetect
+onready var anim = $AnimatedSprite
+onready var shadow = $AnimatedShadow
 
 
 func _ready():
-	pass # Replace with function body.
+	isPlatform = false
+	anim.animation = "T_IdleDown"
 
 func _physics_process(delta):
 	get_input()
@@ -30,6 +39,8 @@ func _physics_process(delta):
 			move_and_slide(velocity * T_SPD, TOPDOWN)
 		else:
 			move_and_slide(velocity * G_SPD, TOPDOWN)
+	
+	play_animation()
 
 func get_input():
 	var _right = Input.is_action_pressed("move_right")
@@ -38,10 +49,10 @@ func get_input():
 	var _down = Input.is_action_pressed("move_down")
 	
 	var _jump = Input.is_action_pressed("jump")
-	var _grab = Input.is_action_pressed("grab")
+	var _grabbing = Input.is_action_pressed("grab")
+	var _grab = Input.is_action_just_pressed("grab")
 	var _interact = Input.is_action_just_pressed("interact")
 	var _switch = Input.is_action_just_pressed("switch")
-	
 	
 	if isPlatform:
 		if _switch:
@@ -62,17 +73,70 @@ func get_input():
 		velocity = velocity.normalized()
 	
 	var collider = grabDetect.get_collider()
-	
-	if _grab and !isGrabbed and !isPlatform:
-		if collider != null and collider.has_method("grabbed"):
+	if !isPlatform and collider != null and collider.has_method("grabbed"):
+		if _grab and _grabbing and !isGrabbed:
 			collider.grabbed(true)
 			isGrabbed = true
-
-	if !_grab and isGrabbed:
-		if collider != null and collider.has_method("grabbed"):
+		if !_grabbing and isGrabbed:
 			collider.grabbed(false)
 			isGrabbed = false
+	
+	if collider != null and collider.has_method("set_motion"):
+		if isGrabbed:
+			collider.set_motion(velocity)
 
-	if isGrabbed:
-		if collider != null and collider.has_method("get_motion"):
-			collider.get_motion(velocity)
+func play_animation():
+	var head = "T_"
+	
+	if isPlatform:
+		head = "P_"
+		shadow.visible = false
+		if velocity.x != 0 and velocity.y == 0 and is_on_floor():
+			state = "Move"
+		elif velocity.y < 0 and !is_on_floor():
+			state = "Jump"
+		elif velocity.y > 0 and !is_on_floor():
+			state = "Fall"
+		else:
+			state = "Idle"
+		
+		if velocity.x > 0:
+			dir = "Right"
+		elif velocity.x < 0:
+			dir = "Left"
+		
+		if dir == "Down" or dir == "Up":
+			dir = "Right"
+	else:
+		head = "T_"
+		shadow.visible = true
+		if isGrabbed:
+			state = "Grab"
+		else:	
+			if velocity != Vector2(0, 0):
+				state = "Move"
+			else:
+				state = "Idle"
+		
+		if state != "Grab":
+			if velocity.x > 0:
+				dir = "Right"
+				grabDetect.rotation_degrees = RIGHT
+			elif velocity.x < 0:
+				dir = "Left"
+				grabDetect.rotation_degrees = LEFT
+			elif velocity.y > 0:
+				dir = "Down"
+				grabDetect.rotation_degrees = DOWN
+			elif velocity.y < 0:
+				dir = "Up"
+				grabDetect.rotation_degrees = UP
+	
+	var newAnim = head + state + dir
+	if anim.animation != newAnim:
+		anim.animation = newAnim
+		anim.frame = 0
+	
+	if shadow.animation != state:
+		shadow.animation = state
+		shadow.frame = 0
