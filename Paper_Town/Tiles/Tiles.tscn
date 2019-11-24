@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/Tiles/TileSprite.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="Tiles" type="Node2D"]
+
+[node name="WallRightUp" type="Sprite" parent="."]
+position = Vector2( 8, 8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WallRightUp"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRightUp/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="WallLeftUp" type="Sprite" parent="."]
+position = Vector2( 40, 8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 0, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WallLeftUp"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeftUp/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="WallLeft" type="Sprite" parent="."]
+position = Vector2( 72, 8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 16, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WallLeft"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="WallRight" type="Sprite" parent="."]
+position = Vector2( 104, 8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 16, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WallRight"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="Floor" type="Sprite" parent="."]
+position = Vector2( 136, 8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 32, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Void" type="Sprite" parent="."]
+position = Vector2( 168, 8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 64, 32, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}

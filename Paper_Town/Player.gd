@@ -15,19 +15,20 @@ const UP = 180
 const LEFT = 90
 const DOWN = 0
 
-var isPlatform = false
 var velocity = Vector2()
 var isGrabbed = false
 var state = "Idle"
 var dir = "Right"
+var isPlatform = false
 
 onready var grabDetect = $GrabDetect
 onready var anim = $AnimatedSprite
 onready var shadow = $AnimatedShadow
+onready var T_col = $T_CollisionShape2D
+onready var P_col = $P_CollisionShape2D
 
 
 func _ready():
-	isPlatform = false
 	anim.animation = "T_IdleDown"
 
 func _physics_process(delta):
@@ -54,13 +55,28 @@ func get_input():
 	var _interact = Input.is_action_just_pressed("interact")
 	var _switch = Input.is_action_just_pressed("switch")
 	
+	# change genre
 	if isPlatform:
+		# to topdown
 		if _switch:
 			isPlatform = false
+			P_col.disabled = true
+			T_col.disabled = false
 	else:
+		# to platform
 		if _switch:
 			isPlatform = true
+			P_col.disabled = false
+			T_col.disabled = true
 	
+	# change all the walls
+	if _switch:
+		var children = get_parent().get_children()
+		for _wall in children:
+			if _wall.is_in_group("changeable") and _wall.has_method("change"):
+				_wall.change(isPlatform)
+	
+	# jump
 	if isPlatform:
 		velocity.x = (int(_right) - int(_left)) * P_SPD
 		if is_on_floor() and _jump:
@@ -72,6 +88,7 @@ func get_input():
 		velocity.y = int(_down) - int(_up)
 		velocity = velocity.normalized()
 	
+	# grab
 	var collider = grabDetect.get_collider()
 	if !isPlatform and collider != null and collider.has_method("grabbed"):
 		if _grab and _grabbing and !isGrabbed:
@@ -83,7 +100,7 @@ func get_input():
 	
 	if collider != null and collider.has_method("set_motion"):
 		if isGrabbed:
-			collider.set_motion(velocity)
+			collider.set_motion(velocity, G_SPD)
 
 func play_animation():
 	var head = "T_"

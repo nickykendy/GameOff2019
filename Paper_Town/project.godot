@@ -19,6 +19,10 @@ config/name="Paper_Town"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Data="*res://Data.gd"
+
 [display]
 
 window/size/width=480
@@ -101,4 +105,5 @@ switch={
 
 [rendering]
 
+quality/2d/gles2_use_nvidia_rect_flicker_workaround=true
 environment/default_environment="res://default_env.tres"
