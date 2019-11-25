@@ -80,3 +80,12 @@ region_rect = Rect2( 64, 32, 16, 16 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="WoodFloor" type="Sprite" parent="."]
+position = Vector2( 200, 8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
