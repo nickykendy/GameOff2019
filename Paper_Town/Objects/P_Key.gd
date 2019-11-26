@@ -1,12 +1,11 @@
 extends Area2D
 
-func pick_up(isPlatform):
+func _process(delta):
 	var bodies = get_overlapping_bodies()
+	var isPick = false
 	for body in bodies:
-		print(body.name)
-		if body.name == "Player":
-			if isPlatform:
-				var door = get_parent().get_node("T_Door")
-				if door.has_method("open_door"):
-					door.open_door()
-					queue_free()
+		if body.name == "Player" and body.has_method("pick_up"):
+			isPick = body.pick_up()
+	
+	if isPick:
+		queue_free()

@@ -72,10 +72,10 @@ position = Vector2( 320, 0 )
 position = Vector2( 256, -2 )
 
 [node name="P_Key" parent="." instance=ExtResource( 4 )]
-position = Vector2( 87, 219 )
+position = Vector2( 168.302, 55.1352 )
 
 [node name="BigDesk" parent="." instance=ExtResource( 5 )]
-position = Vector2( 224, 191 )
+position = Vector2( 169.168, 89.5298 )
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( 144, 192 )

@@ -26,6 +26,7 @@ onready var anim = $AnimatedSprite
 onready var shadow = $AnimatedShadow
 onready var T_col = $T_CollisionShape2D
 onready var P_col = $P_CollisionShape2D
+onready var InteractArea = $InteractArea
 
 
 func _ready():
@@ -52,7 +53,6 @@ func get_input():
 	var _jump = Input.is_action_pressed("jump")
 	var _grabbing = Input.is_action_pressed("grab")
 	var _grab = Input.is_action_just_pressed("grab")
-	var _interact = Input.is_action_just_pressed("interact")
 	var _switch = Input.is_action_just_pressed("switch")
 	
 	# change genre
@@ -157,3 +157,13 @@ func play_animation():
 	if shadow.animation != state:
 		shadow.animation = state
 		shadow.frame = 0
+
+func pick_up():
+	var _interact = Input.is_action_just_pressed("interact")
+	var isPick = false
+	if _interact and isPlatform:
+		var door = get_parent().get_node("T_Door")
+		if door.has_method("open_door"):
+			door.open_door(isPlatform)
+			isPick = true
+	return isPick
