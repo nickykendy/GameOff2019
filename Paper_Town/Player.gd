@@ -20,6 +20,7 @@ var isGrabbed = false
 var state = "Idle"
 var dir = "Right"
 var isPlatform = false
+var canChangeGenre = 0
 
 onready var grabDetect = $GrabDetect
 onready var anim = $AnimatedSprite
@@ -31,6 +32,11 @@ onready var InteractArea = $InteractArea
 
 func _ready():
 	anim.animation = "T_IdleDown"
+	var wrinkles = get_tree().get_nodes_in_group("wrinkles")
+	if wrinkles != null:
+		for wrinkle in wrinkles:
+			wrinkle.connect("body_entered", self, "_on_WrinkleFloor_body_entered")
+			wrinkle.connect("body_exited", self, "_on_WrinkleFloor_body_exited")
 
 func _physics_process(delta):
 	get_input()
@@ -58,23 +64,23 @@ func get_input():
 	# change genre
 	if isPlatform:
 		# to topdown
-		if _switch:
+		if _switch and canChangeGenre == 0:
 			isPlatform = false
 			P_col.disabled = true
 			T_col.disabled = false
 	else:
 		# to platform
-		if _switch:
+		if _switch and canChangeGenre == 0:
 			isPlatform = true
 			P_col.disabled = false
 			T_col.disabled = true
 	
 	# change all the walls
-	if _switch:
-		var children = get_parent().get_children()
-		for _wall in children:
-			if _wall.is_in_group("changeable") and _wall.has_method("change"):
-				_wall.change(isPlatform)
+	if _switch and canChangeGenre == 0:
+		var changeables = get_tree().get_nodes_in_group("changeable")
+		for _changeable in changeables:
+			if _changeable.has_method("change"):
+				_changeable.change(isPlatform)
 	
 	# jump
 	if isPlatform:
@@ -167,3 +173,14 @@ func pick_up():
 			door.open_door(isPlatform)
 			isPick = true
 	return isPick
+
+
+
+func _on_WrinkleFloor_body_entered(body):
+	if body.name == "Player":
+		canChangeGenre += 1
+
+
+func _on_WrinkleFloor_body_exited(body):
+	if body.name == "Player":
+		canChangeGenre -= 1
