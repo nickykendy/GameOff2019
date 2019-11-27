@@ -35,10 +35,10 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 20, 18 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 20, 18 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 20, 8 )
 
 [node name="T_Door" type="StaticBody2D" groups=[
@@ -55,12 +55,12 @@ shape = SubResource( 2 )
 
 [node name="P_CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -16 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 disabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, 26 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

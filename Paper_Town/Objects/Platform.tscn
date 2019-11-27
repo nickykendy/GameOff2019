@@ -12,3 +12,5 @@ script = ExtResource( 1 )
 [node name="T_CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="P_CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]

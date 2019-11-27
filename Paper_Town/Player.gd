@@ -22,12 +22,13 @@ var dir = "Right"
 var isPlatform = false
 var canChangeGenre = 0
 
-onready var grabDetect = $GrabDetect
+onready var detect = $GrabDetect
 onready var anim = $AnimatedSprite
 onready var shadow = $AnimatedShadow
 onready var T_col = $T_CollisionShape2D
 onready var P_col = $P_CollisionShape2D
 onready var InteractArea = $InteractArea
+onready var hint = $Hint
 
 
 func _ready():
@@ -46,7 +47,7 @@ func _physics_process(delta):
 		if !isGrabbed:
 			move_and_slide(velocity * T_SPD, TOPDOWN)
 		else:
-			move_and_slide(velocity * G_SPD, TOPDOWN)
+			velocity = move_and_slide(velocity * G_SPD, TOPDOWN)
 	
 	play_animation()
 
@@ -55,7 +56,8 @@ func get_input():
 	var _left = Input.is_action_pressed("move_left")
 	var _up = Input.is_action_pressed("move_up")
 	var _down = Input.is_action_pressed("move_down")
-	
+	var _interact = Input.is_action_just_pressed("interact")
+	var _interacting = Input.is_action_pressed("interact")
 	var _jump = Input.is_action_pressed("jump")
 	var _grabbing = Input.is_action_pressed("grab")
 	var _grab = Input.is_action_just_pressed("grab")
@@ -94,8 +96,17 @@ func get_input():
 		velocity.y = int(_down) - int(_up)
 		velocity = velocity.normalized()
 	
+	# detect
+	var collider = detect.get_collider()
+	var world = get_parent()
+	
+	# grab hint
+	if !isPlatform and collider != null and collider.has_method("grabbed") and !_grab and !_grabbing:
+		hint.visible = true
+		hint.animation = "GRAB"
+	else:
+		hint.visible = false
 	# grab
-	var collider = grabDetect.get_collider()
 	if !isPlatform and collider != null and collider.has_method("grabbed"):
 		if _grab and _grabbing and !isGrabbed:
 			collider.grabbed(true)
@@ -103,10 +114,28 @@ func get_input():
 		if !_grabbing and isGrabbed:
 			collider.grabbed(false)
 			isGrabbed = false
+	else:
+		isGrabbed = false
 	
 	if collider != null and collider.has_method("set_motion"):
 		if isGrabbed:
 			collider.set_motion(velocity, G_SPD)
+	else:
+		isGrabbed = false
+	
+	# crack a pad
+	if !isPlatform and collider != null and collider.is_in_group("pad"):
+		hint.visible = true
+		if _interacting:
+			if hint.animation != "PROGRESS":
+				hint.animation = "PROGRESS"
+				hint.frame = 0
+				hint.play()
+		else:
+			hint.animation = "CRACK"
+	else:
+		hint.visible = false
+		
 
 func play_animation():
 	var head = "T_"
@@ -144,16 +173,16 @@ func play_animation():
 		if state != "Grab":
 			if velocity.x > 0:
 				dir = "Right"
-				grabDetect.rotation_degrees = RIGHT
+				detect.rotation_degrees = RIGHT
 			elif velocity.x < 0:
 				dir = "Left"
-				grabDetect.rotation_degrees = LEFT
+				detect.rotation_degrees = LEFT
 			elif velocity.y > 0:
 				dir = "Down"
-				grabDetect.rotation_degrees = DOWN
+				detect.rotation_degrees = DOWN
 			elif velocity.y < 0:
 				dir = "Up"
-				grabDetect.rotation_degrees = UP
+				detect.rotation_degrees = UP
 	
 	var newAnim = head + state + dir
 	if anim.animation != newAnim:
@@ -167,20 +196,36 @@ func play_animation():
 func pick_up():
 	var _interact = Input.is_action_just_pressed("interact")
 	var isPick = false
+	if isPlatform:
+		if !_interact:
+			hint.visible = true
+			hint.animation = "PICK"
+		else:
+			hint.visible = false
+	
 	if _interact and isPlatform:
-		var door = get_parent().get_node("T_Door")
-		if door.has_method("open_door"):
-			door.open_door(isPlatform)
-			isPick = true
+		get_door_open()
+		isPick = true
+	
 	return isPick
-
-
 
 func _on_WrinkleFloor_body_entered(body):
 	if body.name == "Player":
 		canChangeGenre += 1
 
-
 func _on_WrinkleFloor_body_exited(body):
 	if body.name == "Player":
 		canChangeGenre -= 1
+
+
+func _on_Hint_animation_finished():
+	var collider = detect.get_collider()
+	if collider != null and collider.is_in_group("pad"):
+		collider.remove_from_group("pad")
+		hint.visible = false
+		get_door_open()
+
+func get_door_open():
+	var door = get_parent().get_node("T_Door")
+	if door != null and door.has_method("open_door"):
+		door.open_door(isPlatform)

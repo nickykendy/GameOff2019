@@ -3,6 +3,7 @@ extends KinematicBody2D
 onready var spr = $AnimatedSprite
 onready var T_col = $T_CollisionShape2D
 onready var P_col = $P_CollisionShape2D
+onready var rem = $RemoteTransform2D
 
 var G_SPD = 100
 var isGrabbed = false

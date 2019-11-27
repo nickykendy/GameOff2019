@@ -1,15 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Tiles/TileSets.tres" type="TileSet" id=1]
 [ext_resource path="res://Tiles/WallUp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Objects/T_Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tiles/WrinkleFloor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Objects/P_Key.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Objects/BigDesk.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Tiles/WallDown.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Tiles/WallLeftDown.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Tiles/WallRightDown.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Objects/StoneDeskH.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Pad.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/BigDesk.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Tiles/WallDown.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Tiles/WallLeftDown.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Tiles/WallRightDown.tscn" type="PackedScene" id=12]
 
 [node name="World" type="Node2D"]
 
@@ -102,68 +104,77 @@ position = Vector2( 40, 128 )
 [node name="P_Key" parent="." instance=ExtResource( 5 )]
 position = Vector2( 72, 32 )
 
-[node name="BigDesk" parent="." instance=ExtResource( 6 )]
+[node name="StoneDeskH" parent="." instance=ExtResource( 6 )]
+position = Vector2( 240, 160 )
+
+[node name="Pad" parent="." instance=ExtResource( 7 )]
+position = Vector2( 272, 88 )
+
+[node name="BigDesk" parent="." instance=ExtResource( 8 )]
 position = Vector2( 169.168, 89.5298 )
 
-[node name="Player" parent="." instance=ExtResource( 7 )]
-position = Vector2( 144, 192 )
+[node name="Player" parent="." instance=ExtResource( 9 )]
+position = Vector2( 136, 191 )
 
-[node name="WallDown" parent="." groups=[
-"wall",
-] instance=ExtResource( 8 )]
-position = Vector2( 32, 288 )
+[node name="WallDownGroup" type="Node" parent="."]
+editor/display_folded = true
 
-[node name="WallDown2" parent="." groups=[
-"wall",
-] instance=ExtResource( 8 )]
-position = Vector2( 64, 288 )
-
-[node name="WallDown3" parent="." groups=[
-"wall",
-] instance=ExtResource( 8 )]
-position = Vector2( 96, 288 )
-
-[node name="WallDown4" parent="." groups=[
-"wall",
-] instance=ExtResource( 8 )]
-position = Vector2( 128, 288 )
-
-[node name="WallDown5" parent="." groups=[
-"wall",
-] instance=ExtResource( 8 )]
-position = Vector2( 160, 288 )
-
-[node name="WallDown6" parent="." groups=[
-"wall",
-] instance=ExtResource( 8 )]
-position = Vector2( 192, 288 )
-
-[node name="WallDown7" parent="." groups=[
-"wall",
-] instance=ExtResource( 8 )]
-position = Vector2( 224, 288 )
-
-[node name="WallDown8" parent="." groups=[
-"wall",
-] instance=ExtResource( 8 )]
-position = Vector2( 256, 288 )
-
-[node name="WallDown9" parent="." groups=[
-"wall",
-] instance=ExtResource( 8 )]
-position = Vector2( 288, 288 )
-
-[node name="WallDown10" parent="." groups=[
-"wall",
-] instance=ExtResource( 8 )]
-position = Vector2( 320, 288 )
-
-[node name="WallLeftDown" parent="." groups=[
-"wall",
-] instance=ExtResource( 9 )]
-position = Vector2( 8, 288 )
-
-[node name="WallRightDown" parent="." groups=[
+[node name="WallDown" parent="WallDownGroup" groups=[
 "wall",
 ] instance=ExtResource( 10 )]
+position = Vector2( 32, 288 )
+
+[node name="WallDown2" parent="WallDownGroup" groups=[
+"wall",
+] instance=ExtResource( 10 )]
+position = Vector2( 64, 288 )
+
+[node name="WallDown3" parent="WallDownGroup" groups=[
+"wall",
+] instance=ExtResource( 10 )]
+position = Vector2( 96, 288 )
+
+[node name="WallDown4" parent="WallDownGroup" groups=[
+"wall",
+] instance=ExtResource( 10 )]
+position = Vector2( 128, 288 )
+
+[node name="WallDown5" parent="WallDownGroup" groups=[
+"wall",
+] instance=ExtResource( 10 )]
+position = Vector2( 160, 288 )
+
+[node name="WallDown6" parent="WallDownGroup" groups=[
+"wall",
+] instance=ExtResource( 10 )]
+position = Vector2( 192, 288 )
+
+[node name="WallDown7" parent="WallDownGroup" groups=[
+"wall",
+] instance=ExtResource( 10 )]
+position = Vector2( 224, 288 )
+
+[node name="WallDown8" parent="WallDownGroup" groups=[
+"wall",
+] instance=ExtResource( 10 )]
+position = Vector2( 256, 288 )
+
+[node name="WallDown9" parent="WallDownGroup" groups=[
+"wall",
+] instance=ExtResource( 10 )]
+position = Vector2( 288, 288 )
+
+[node name="WallDown10" parent="WallDownGroup" groups=[
+"wall",
+] instance=ExtResource( 10 )]
+position = Vector2( 320, 288 )
+
+[node name="WallLeftDown" parent="WallDownGroup" groups=[
+"wall",
+] instance=ExtResource( 11 )]
+position = Vector2( 8, 288 )
+
+[node name="WallRightDown" parent="WallDownGroup" groups=[
+"wall",
+] instance=ExtResource( 12 )]
 position = Vector2( 344, 288 )

@@ -6,10 +6,12 @@ onready var P_col = $P_CollisionShape2D
 var isOpen = false
 
 func open_door(newGenre):
-	if !newGenre: # platform
-		spr.animation = "default"
-		spr.play("default", false)
+	if !newGenre: # topdown
+		spr.animation = "open"
+		spr.frame = 0
+		spr.play()
 		yield(spr, "animation_finished")
+		spr.stop()
 		spr.animation = "OpenChange"
 		spr.frame = 0
 	isOpen = true
