@@ -4,11 +4,11 @@
 [ext_resource path="res://Tiles/WallUp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Objects/T_Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tiles/WrinkleFloor.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Objects/P_Key.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Objects/StoneDeskH.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/StoneDeskV.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Objects/Pad.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Objects/BigDesk.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/StoneDeskH.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/StoneDeskV.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Pad.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/BigDesk.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Objects/T_Key.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Tiles/WallDown.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Tiles/WallLeftDown.tscn" type="PackedScene" id=12]
@@ -102,26 +102,26 @@ position = Vector2( 72, 128 )
 [node name="WrinkleFloor9" parent="." instance=ExtResource( 4 )]
 position = Vector2( 40, 128 )
 
-[node name="P_Key" parent="." instance=ExtResource( 5 )]
-position = Vector2( 232.475, 141.234 )
+[node name="StoneDeskH" parent="." instance=ExtResource( 5 )]
+position = Vector2( 200.056, 113.923 )
 
-[node name="StoneDeskH" parent="." instance=ExtResource( 6 )]
-position = Vector2( 232.056, 113.923 )
+[node name="StoneDeskV" parent="." instance=ExtResource( 6 )]
+position = Vector2( 172.411, 139.801 )
 
-[node name="StoneDeskV" parent="." instance=ExtResource( 7 )]
-position = Vector2( 204.411, 139.801 )
+[node name="StoneDeskV2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 228.53, 139.276 )
 
-[node name="StoneDeskV2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 260.53, 139.276 )
+[node name="Pad" parent="." instance=ExtResource( 7 )]
+position = Vector2( 240, 88 )
 
-[node name="Pad" parent="." instance=ExtResource( 8 )]
-position = Vector2( 272, 88 )
+[node name="BigDesk" parent="." instance=ExtResource( 8 )]
+position = Vector2( 137.168, 89.5298 )
 
-[node name="BigDesk" parent="." instance=ExtResource( 9 )]
-position = Vector2( 169.168, 89.5298 )
+[node name="P_Key" parent="." instance=ExtResource( 9 )]
+position = Vector2( 200, 64 )
 
 [node name="Player" parent="." instance=ExtResource( 10 )]
-position = Vector2( 136, 191 )
+position = Vector2( 104, 191 )
 
 [node name="WallDownGroup" type="Node" parent="."]
 editor/display_folded = true

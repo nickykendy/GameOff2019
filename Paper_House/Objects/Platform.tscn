@@ -3,6 +3,7 @@
 [ext_resource path="res://Objects/Platform.gd" type="Script" id=1]
 
 [node name="Platform" type="KinematicBody2D" groups=[
+"platform",
 "changeable",
 ]]
 script = ExtResource( 1 )

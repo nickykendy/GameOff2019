@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Paper_Town"
+config/name="Paper_House"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 

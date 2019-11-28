@@ -99,7 +99,7 @@ func get_input():
 	var world = get_parent()
 	
 	# grab hint
-	if !isPlatform and collider != null and collider.has_method("grabbed") and !_interact and !_interacting:
+	if !isPlatform and collider != null and collider.is_in_group("platform") and !_interact and !_interacting:
 		hint.visible = true
 		hint.animation = "GRAB"
 	# crack a pad
@@ -113,6 +113,14 @@ func get_input():
 		else:
 			hint.stop()
 			hint.animation = "CRACK"
+	elif !isPlatform and collider != null and collider.is_in_group("key"):
+		if _interact and collider.has_method("is_picked"):
+			collider.is_picked()
+			get_door_open()
+			hint.visible = false
+		else:
+			hint.visible = true
+			hint.animation = "PICK"
 	else:
 		hint.visible = false
 	# grab
@@ -188,22 +196,6 @@ func play_animation():
 		shadow.animation = state
 		shadow.frame = 0
 
-func pick_up():
-	var _interact = Input.is_action_just_pressed("interact")
-	var isPick = false
-	if isPlatform:
-		if !_interact:
-			hint.visible = true
-			hint.animation = "PICK"
-		else:
-			hint.visible = false
-	
-	if _interact and isPlatform:
-		get_door_open()
-		isPick = true
-	
-	return isPick
-
 func _on_WrinkleFloor_body_entered(body):
 	if body.name == "Player":
 		canChangeGenre += 1
@@ -222,5 +214,6 @@ func _on_Hint_animation_finished():
 
 func get_door_open():
 	var door = get_parent().get_node("T_Door")
+	print(door)
 	if door != null and door.has_method("open_door"):
 		door.open_door(isPlatform)
