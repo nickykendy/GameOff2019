@@ -59,8 +59,6 @@ func get_input():
 	var _interact = Input.is_action_just_pressed("interact")
 	var _interacting = Input.is_action_pressed("interact")
 	var _jump = Input.is_action_pressed("jump")
-	var _grabbing = Input.is_action_pressed("grab")
-	var _grab = Input.is_action_just_pressed("grab")
 	var _switch = Input.is_action_just_pressed("switch")
 	
 	# change genre
@@ -101,17 +99,28 @@ func get_input():
 	var world = get_parent()
 	
 	# grab hint
-	if !isPlatform and collider != null and collider.has_method("grabbed") and !_grab and !_grabbing:
+	if !isPlatform and collider != null and collider.has_method("grabbed") and !_interact and !_interacting:
 		hint.visible = true
 		hint.animation = "GRAB"
+	# crack a pad
+	elif !isPlatform and collider != null and collider.is_in_group("pad"):
+		hint.visible = true
+		if _interacting:
+			if hint.animation != "PROGRESS":
+				hint.animation = "PROGRESS"
+				hint.frame = 0
+				hint.play()
+		else:
+			hint.stop()
+			hint.animation = "CRACK"
 	else:
 		hint.visible = false
 	# grab
 	if !isPlatform and collider != null and collider.has_method("grabbed"):
-		if _grab and _grabbing and !isGrabbed:
+		if _interact and _interacting and !isGrabbed:
 			collider.grabbed(true)
 			isGrabbed = true
-		if !_grabbing and isGrabbed:
+		if !_interacting and isGrabbed:
 			collider.grabbed(false)
 			isGrabbed = false
 	else:
@@ -122,20 +131,6 @@ func get_input():
 			collider.set_motion(velocity, G_SPD)
 	else:
 		isGrabbed = false
-	
-	# crack a pad
-	if !isPlatform and collider != null and collider.is_in_group("pad"):
-		hint.visible = true
-		if _interacting:
-			if hint.animation != "PROGRESS":
-				hint.animation = "PROGRESS"
-				hint.frame = 0
-				hint.play()
-		else:
-			hint.animation = "CRACK"
-	else:
-		hint.visible = false
-		
 
 func play_animation():
 	var head = "T_"
@@ -217,13 +212,13 @@ func _on_WrinkleFloor_body_exited(body):
 	if body.name == "Player":
 		canChangeGenre -= 1
 
-
 func _on_Hint_animation_finished():
 	var collider = detect.get_collider()
-	if collider != null and collider.is_in_group("pad"):
-		collider.remove_from_group("pad")
-		hint.visible = false
-		get_door_open()
+	if hint.animation == "PROGRESS":
+		if collider != null and collider.is_in_group("pad"):
+			collider.remove_from_group("pad")
+			hint.visible = false
+			get_door_open()
 
 func get_door_open():
 	var door = get_parent().get_node("T_Door")
