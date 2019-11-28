@@ -27,7 +27,6 @@ onready var anim = $AnimatedSprite
 onready var shadow = $AnimatedShadow
 onready var T_col = $T_CollisionShape2D
 onready var P_col = $P_CollisionShape2D
-onready var InteractArea = $InteractArea
 onready var hint = $Hint
 
 
@@ -103,7 +102,7 @@ func get_input():
 		hint.visible = true
 		hint.animation = "GRAB"
 	# crack a pad
-	elif !isPlatform and collider != null and collider.is_in_group("pad"):
+	elif isPlatform and collider != null and collider.is_in_group("pad"):
 		hint.visible = true
 		if _interacting:
 			if hint.animation != "PROGRESS":
@@ -207,7 +206,8 @@ func _on_WrinkleFloor_body_exited(body):
 func _on_Hint_animation_finished():
 	var collider = detect.get_collider()
 	if hint.animation == "PROGRESS":
-		if collider != null and collider.is_in_group("pad"):
+		if collider != null and collider.is_in_group("pad") and collider.has_method("is_cracking"):
+			collider.is_cracking()
 			collider.remove_from_group("pad")
 			hint.visible = false
 			get_door_open()

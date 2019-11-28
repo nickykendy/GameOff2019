@@ -6,7 +6,7 @@
 [ext_resource path="res://Tiles/WrinkleFloor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Objects/StoneDeskH.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/StoneDeskV.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Pad.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/P_Pad.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Objects/BigDesk.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Objects/T_Key.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=10]
@@ -111,11 +111,11 @@ position = Vector2( 172.411, 139.801 )
 [node name="StoneDeskV2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 228.53, 139.276 )
 
-[node name="Pad" parent="." instance=ExtResource( 7 )]
-position = Vector2( 240, 88 )
+[node name="P_Pad" parent="." instance=ExtResource( 7 )]
+position = Vector2( 275.882, 73.3871 )
 
 [node name="BigDesk" parent="." instance=ExtResource( 8 )]
-position = Vector2( 137.168, 89.5298 )
+position = Vector2( 279.747, 112.945 )
 
 [node name="P_Key" parent="." instance=ExtResource( 9 )]
 position = Vector2( 200, 64 )
