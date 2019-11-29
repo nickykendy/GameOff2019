@@ -28,6 +28,7 @@ onready var shadow = $AnimatedShadow
 onready var T_col = $T_CollisionShape2D
 onready var P_col = $P_CollisionShape2D
 onready var hint = $Hint
+onready var sound = $AnimationPlayer
 
 
 func _ready():
@@ -64,12 +65,18 @@ func get_input():
 	if isPlatform:
 		# to topdown
 		if _switch and canChangeGenre == 0:
+			if sound.current_animation != "ChangeGenre":
+				sound.stop()
+			sound.current_animation = "ChangeGenre"
+			sound.play()
 			isPlatform = false
 			P_col.disabled = true
 			T_col.disabled = false
 	else:
 		# to platform
 		if _switch and canChangeGenre == 0:
+			sound.current_animation = "ChangeGenre"
+			sound.play()
 			isPlatform = true
 			P_col.disabled = false
 			T_col.disabled = true
@@ -147,6 +154,8 @@ func play_animation():
 		shadow.visible = false
 		if velocity.x != 0 and velocity.y == 0 and is_on_floor():
 			state = "Move"
+			sound.current_animation = "Footstep"
+			sound.play()
 		elif velocity.y < 0 and !is_on_floor():
 			state = "Jump"
 		elif velocity.y > 0 and !is_on_floor():
@@ -169,6 +178,8 @@ func play_animation():
 		else:	
 			if velocity != Vector2(0, 0):
 				state = "Move"
+				sound.current_animation = "Footstep"
+				sound.play()
 			else:
 				state = "Idle"
 		
