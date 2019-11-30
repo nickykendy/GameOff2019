@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Objects/Stone.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Parent and Script/Stone.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/Miscs/StoneDeskV/StoneDeskV1.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Miscs/StoneDeskV/StoneDeskV2.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Miscs/StoneDeskV/StoneDeskV3.png" type="Texture" id=4]

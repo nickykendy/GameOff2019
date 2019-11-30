@@ -1,10 +1,11 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Objects/Platform.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Parent and Script/Platform.gd" type="Script" id=1]
 
 [node name="Platform" type="KinematicBody2D" groups=[
-"platform",
 "changeable",
+"platform",
+"heavy",
 ]]
 script = ExtResource( 1 )
 

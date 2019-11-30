@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Objects/P_Pad.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Parent and Script/P_Pad.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Miscs/P_Pad/P_Pad_OP4.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Miscs/P_Pad/P_Pad_OP3.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Miscs/P_Pad/P_Pad_OP2.png" type="Texture" id=4]
@@ -27,8 +27,8 @@ animations = [ {
 extents = Vector2( 7, 15 )
 
 [node name="P_Pad" type="Area2D" groups=[
-"changeable",
 "pad",
+"changeable",
 ]]
 script = ExtResource( 1 )
 

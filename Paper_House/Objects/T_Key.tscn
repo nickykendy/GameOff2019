@@ -1,12 +1,13 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Objects/T_Key.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Parent and Script/T_Key.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Miscs/T_Key/T_Key_change1.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Miscs/T_Key/T_Key_change2.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Miscs/T_Key/T_Key_change3.png" type="Texture" id=4]
 [ext_resource path="res://Resources/Miscs/T_Key/T_Key_change4.png" type="Texture" id=5]
 [ext_resource path="res://Resources/Miscs/T_Key/T_Key1.png" type="Texture" id=6]
 [ext_resource path="res://Resources/Miscs/T_Key/T_Key2.png" type="Texture" id=7]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

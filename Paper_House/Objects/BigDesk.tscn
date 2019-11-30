@@ -1,9 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Objects/Platform.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Parent and Script/Platform.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/Miscs/BigDesk/BigDesk1.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Miscs/BigDesk/BigDesk2.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Miscs/BigDesk/BigDesk3.png" type="Texture" id=4]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

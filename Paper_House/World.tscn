@@ -1,18 +1,20 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Tiles/TileSets.tres" type="TileSet" id=1]
 [ext_resource path="res://Tiles/WallUp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Objects/T_Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tiles/WrinkleFloor.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Objects/StoneDeskH.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Objects/StoneDeskV.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/P_Pad.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Objects/BigDesk.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Objects/T_Key.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Tiles/WallDown.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Tiles/WallLeftDown.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Tiles/WallRightDown.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Objects/RaisedFloor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Window.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/StoneDeskH.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/StoneDeskV.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Objects/P_Pad.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/BigDesk.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Objects/T_Key.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Tiles/WallDown.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Tiles/WallLeftDown.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Tiles/WallRightDown.tscn" type="PackedScene" id=15]
 
 [node name="World" type="Node2D"]
 
@@ -25,6 +27,7 @@ tile_data = PoolIntArray( -524304, 5, 0, -524303, 5, 0, -524302, 5, 0, -524301, 
 
 [node name="WallUpLayer" type="Node2D" parent="."]
 pause_mode = 1
+editor/display_folded = true
 z_index = -1
 
 [node name="WallUp" parent="WallUpLayer" groups=[
@@ -111,25 +114,31 @@ position = Vector2( 72, 128 )
 [node name="WrinkleFloor9" parent="ObjectLayer" instance=ExtResource( 4 )]
 position = Vector2( 40, 128 )
 
-[node name="StoneDeskH" parent="ObjectLayer" instance=ExtResource( 5 )]
+[node name="RaisedFloor" parent="ObjectLayer" instance=ExtResource( 5 )]
+position = Vector2( 96.0123, 210.452 )
+
+[node name="Window" parent="ObjectLayer" instance=ExtResource( 6 )]
+position = Vector2( 229.006, 226.656 )
+
+[node name="StoneDeskH" parent="ObjectLayer" instance=ExtResource( 7 )]
 position = Vector2( 200.056, 113.923 )
 
-[node name="StoneDeskV" parent="ObjectLayer" instance=ExtResource( 6 )]
+[node name="StoneDeskV" parent="ObjectLayer" instance=ExtResource( 8 )]
 position = Vector2( 172.411, 139.801 )
 
-[node name="StoneDeskV2" parent="ObjectLayer" instance=ExtResource( 6 )]
+[node name="StoneDeskV2" parent="ObjectLayer" instance=ExtResource( 8 )]
 position = Vector2( 228.53, 139.276 )
 
-[node name="P_Pad" parent="ObjectLayer" instance=ExtResource( 7 )]
+[node name="P_Pad" parent="ObjectLayer" instance=ExtResource( 9 )]
 position = Vector2( 275.882, 73.3871 )
 
-[node name="BigDesk" parent="ObjectLayer" instance=ExtResource( 8 )]
+[node name="BigDesk" parent="ObjectLayer" instance=ExtResource( 10 )]
 position = Vector2( 279.747, 112.945 )
 
-[node name="P_Key" parent="ObjectLayer" instance=ExtResource( 9 )]
+[node name="P_Key" parent="ObjectLayer" instance=ExtResource( 11 )]
 position = Vector2( 200, 64 )
 
-[node name="Player" parent="ObjectLayer" instance=ExtResource( 10 )]
+[node name="Player" parent="ObjectLayer" instance=ExtResource( 12 )]
 position = Vector2( 152.341, 66.5447 )
 
 [node name="WallDownLayer" type="Node2D" parent="."]
@@ -138,60 +147,60 @@ z_index = 1
 
 [node name="WallDown" parent="WallDownLayer" groups=[
 "wall",
-] instance=ExtResource( 11 )]
+] instance=ExtResource( 13 )]
 position = Vector2( 32, 288 )
 
 [node name="WallDown2" parent="WallDownLayer" groups=[
 "wall",
-] instance=ExtResource( 11 )]
+] instance=ExtResource( 13 )]
 position = Vector2( 64, 288 )
 
 [node name="WallDown3" parent="WallDownLayer" groups=[
 "wall",
-] instance=ExtResource( 11 )]
+] instance=ExtResource( 13 )]
 position = Vector2( 96, 288 )
 
 [node name="WallDown4" parent="WallDownLayer" groups=[
 "wall",
-] instance=ExtResource( 11 )]
+] instance=ExtResource( 13 )]
 position = Vector2( 128, 288 )
 
 [node name="WallDown5" parent="WallDownLayer" groups=[
 "wall",
-] instance=ExtResource( 11 )]
+] instance=ExtResource( 13 )]
 position = Vector2( 160, 288 )
 
 [node name="WallDown6" parent="WallDownLayer" groups=[
 "wall",
-] instance=ExtResource( 11 )]
+] instance=ExtResource( 13 )]
 position = Vector2( 192, 288 )
 
 [node name="WallDown7" parent="WallDownLayer" groups=[
 "wall",
-] instance=ExtResource( 11 )]
+] instance=ExtResource( 13 )]
 position = Vector2( 224, 288 )
 
 [node name="WallDown8" parent="WallDownLayer" groups=[
 "wall",
-] instance=ExtResource( 11 )]
+] instance=ExtResource( 13 )]
 position = Vector2( 256, 288 )
 
 [node name="WallDown9" parent="WallDownLayer" groups=[
 "wall",
-] instance=ExtResource( 11 )]
+] instance=ExtResource( 13 )]
 position = Vector2( 288, 288 )
 
 [node name="WallDown10" parent="WallDownLayer" groups=[
 "wall",
-] instance=ExtResource( 11 )]
+] instance=ExtResource( 13 )]
 position = Vector2( 320, 288 )
 
 [node name="WallLeftDown" parent="WallDownLayer" groups=[
 "wall",
-] instance=ExtResource( 12 )]
+] instance=ExtResource( 14 )]
 position = Vector2( 8, 288 )
 
 [node name="WallRightDown" parent="WallDownLayer" groups=[
 "wall",
-] instance=ExtResource( 13 )]
+] instance=ExtResource( 15 )]
 position = Vector2( 344, 288 )

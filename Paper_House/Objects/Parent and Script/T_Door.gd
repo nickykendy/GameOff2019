@@ -3,11 +3,11 @@ extends StaticBody2D
 onready var spr = $AnimatedSprite
 onready var T_col = $T_CollisionShape2D
 onready var P_col = $P_CollisionShape2D
-onready var snd = $AudioOpenDoor
+onready var snd = $SoundPlayer
 var isOpen = false
 
 func open_door(newGenre):
-	snd.play()
+	snd.play("OpenDoor")
 	if !newGenre: # topdown
 		spr.animation = "open"
 		spr.frame = 0
@@ -46,7 +46,3 @@ func change(newGenre):
 			spr.play("ClosedChange", true)
 		P_col.disabled = true
 		T_col.disabled = false
-
-func _on_AudioOpenDoor_finished():
-	print("STOP!!!!!!!!!!!!!!!!!!!!!!!!!!")
-	snd.stop()

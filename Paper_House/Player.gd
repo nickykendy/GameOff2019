@@ -87,7 +87,6 @@ func get_input():
 			detect.collide_with_areas = false
 			P_col.disabled = true
 			T_col.disabled = false
-			
 	else:
 		# to platform
 		if _switch and canChangeGenre == 0 and canChange:
@@ -96,10 +95,8 @@ func get_input():
 			P_col.disabled = false
 			T_col.disabled = true
 	
-	# play sound
-	print(!_switch,state,canPlaySound)
+	# play footstep sound
 	if !_switch and state == "Move" and canPlaySound:
-		
 		play_snd("Footstep")
 		
 	# change all the walls
@@ -121,7 +118,7 @@ func get_input():
 		velocity.y = int(_down) - int(_up)
 		velocity = velocity.normalized()
 	
-	# detect
+	# get detect collider
 	var collider = detect.get_collider()
 	
 	# grab hint
@@ -165,7 +162,6 @@ func get_input():
 			collider.set_motion(velocity, G_SPD)
 	else:
 		isGrabbed = false
-	
 
 func play_animation():
 	var head = "T_"
@@ -262,6 +258,3 @@ func _on_Timer_timeout():
 
 func _on_SoundAnim_animation_finished(anim_name):
 	canPlaySound = true
-
-func _on_PlayerAnimation_frame_changed():
-	pass # Replace with function body.
