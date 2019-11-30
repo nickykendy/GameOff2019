@@ -3,9 +3,11 @@ extends StaticBody2D
 onready var spr = $AnimatedSprite
 onready var T_col = $T_CollisionShape2D
 onready var P_col = $P_CollisionShape2D
+onready var snd = $AudioOpenDoor
 var isOpen = false
 
 func open_door(newGenre):
+	snd.play()
 	if !newGenre: # topdown
 		spr.animation = "open"
 		spr.frame = 0
@@ -17,7 +19,8 @@ func open_door(newGenre):
 	isOpen = true
 
 func _on_Area2D_body_entered(body):
-	if body == get_parent().get_node("Player") and isOpen:
+	var player = get_tree().get_nodes_in_group("player")
+	if body == player[0] and isOpen:
 		print("Enter next room!")
 
 func change(newGenre):
@@ -43,3 +46,7 @@ func change(newGenre):
 			spr.play("ClosedChange", true)
 		P_col.disabled = true
 		T_col.disabled = false
+
+func _on_AudioOpenDoor_finished():
+	print("STOP!!!!!!!!!!!!!!!!!!!!!!!!!!")
+	snd.stop()

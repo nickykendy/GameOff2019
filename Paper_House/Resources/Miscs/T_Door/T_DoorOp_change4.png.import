@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T_DoorCl_change2.png-fed7837fcd7510e4442d2eeefd43ef01.stex"
+path="res://.import/T_DoorOp_change4.png-3b76f03c4f4f4f61bb6536376377511c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Miscs/T_DoorCl_change/T_DoorCl_change2.png"
-dest_files=[ "res://.import/T_DoorCl_change2.png-fed7837fcd7510e4442d2eeefd43ef01.stex" ]
+source_file="res://Resources/Miscs/T_Door/T_DoorOp_change4.png"
+dest_files=[ "res://.import/T_DoorOp_change4.png-3b76f03c4f4f4f61bb6536376377511c.stex" ]
 
 [params]
 

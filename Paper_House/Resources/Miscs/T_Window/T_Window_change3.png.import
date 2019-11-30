@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/T_DoorOp_change4.png-b928e6f635ab91bc5dcc63bd4da1c082.stex"
+path="res://.import/T_Window_change3.png-0feccba798215341dce7110ccf97c495.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Miscs/T_DoorOp_change/T_DoorOp_change4.png"
-dest_files=[ "res://.import/T_DoorOp_change4.png-b928e6f635ab91bc5dcc63bd4da1c082.stex" ]
+source_file="res://Resources/Miscs/T_Window/T_Window_change3.png"
+dest_files=[ "res://.import/T_Window_change3.png-0feccba798215341dce7110ccf97c495.stex" ]
 
 [params]
 

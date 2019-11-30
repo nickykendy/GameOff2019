@@ -14,21 +14,28 @@ const RIGHT = 270
 const UP = 180
 const LEFT = 90
 const DOWN = 0
+const PLATFORM_GENRE = true
+const TOPDOWN_GENRE = false
 
 var velocity = Vector2()
 var isGrabbed = false
 var state = "Idle"
 var dir = "Right"
-var isPlatform = false
+var isPlatform = false setget change_genre
 var canChangeGenre = 0
+var canChange = true
+var canPlaySound = true
 
 onready var detect = $GrabDetect
-onready var anim = $AnimatedSprite
+onready var anim = $PlayerAnimation
 onready var shadow = $AnimatedShadow
 onready var T_col = $T_CollisionShape2D
 onready var P_col = $P_CollisionShape2D
 onready var hint = $Hint
-onready var sound = $AnimationPlayer
+onready var sound = $SoundAnim
+onready var snd_footstep = $AudioFootstep
+onready var snd_change = $AudioChangeGenre
+onready var cd = $Timer
 
 
 func _ready():
@@ -51,6 +58,17 @@ func _physics_process(delta):
 	
 	play_animation()
 
+func change_genre(value):
+	canChange = false
+	play_snd("ChangeGenre")
+	canPlaySound = false
+	isPlatform = value
+	cd.start(0.2)
+
+func play_snd(snd):
+	sound.play(snd)
+	canPlaySound = false
+	
 func get_input():
 	var _right = Input.is_action_pressed("move_right")
 	var _left = Input.is_action_pressed("move_left")
@@ -64,23 +82,26 @@ func get_input():
 	# change genre
 	if isPlatform:
 		# to topdown
-		if _switch and canChangeGenre == 0:
-			if sound.current_animation != "ChangeGenre":
-				sound.stop()
-			sound.current_animation = "ChangeGenre"
-			sound.play()
-			isPlatform = false
+		if _switch and canChangeGenre == 0 and canChange:
+			change_genre(TOPDOWN_GENRE)
+			detect.collide_with_areas = false
 			P_col.disabled = true
 			T_col.disabled = false
+			
 	else:
 		# to platform
-		if _switch and canChangeGenre == 0:
-			sound.current_animation = "ChangeGenre"
-			sound.play()
-			isPlatform = true
+		if _switch and canChangeGenre == 0 and canChange:
+			change_genre(PLATFORM_GENRE)
+			detect.collide_with_areas = true
 			P_col.disabled = false
 			T_col.disabled = true
 	
+	# play sound
+	print(!_switch,state,canPlaySound)
+	if !_switch and state == "Move" and canPlaySound:
+		
+		play_snd("Footstep")
+		
 	# change all the walls
 	if _switch and canChangeGenre == 0:
 		var changeables = get_tree().get_nodes_in_group("changeable")
@@ -102,7 +123,6 @@ func get_input():
 	
 	# detect
 	var collider = detect.get_collider()
-	var world = get_parent()
 	
 	# grab hint
 	if !isPlatform and collider != null and collider.is_in_group("platform") and !_interact and !_interacting:
@@ -145,6 +165,7 @@ func get_input():
 			collider.set_motion(velocity, G_SPD)
 	else:
 		isGrabbed = false
+	
 
 func play_animation():
 	var head = "T_"
@@ -154,8 +175,6 @@ func play_animation():
 		shadow.visible = false
 		if velocity.x != 0 and velocity.y == 0 and is_on_floor():
 			state = "Move"
-			sound.current_animation = "Footstep"
-			sound.play()
 		elif velocity.y < 0 and !is_on_floor():
 			state = "Jump"
 		elif velocity.y > 0 and !is_on_floor():
@@ -165,11 +184,14 @@ func play_animation():
 		
 		if velocity.x > 0:
 			dir = "Right"
+			detect.rotation_degrees = RIGHT
 		elif velocity.x < 0:
 			dir = "Left"
+			detect.rotation_degrees = LEFT
 		
 		if dir == "Down" or dir == "Up":
 			dir = "Right"
+			detect.rotation_degrees = RIGHT
 	else:
 		head = "T_"
 		shadow.visible = true
@@ -178,8 +200,6 @@ func play_animation():
 		else:	
 			if velocity != Vector2(0, 0):
 				state = "Move"
-				sound.current_animation = "Footstep"
-				sound.play()
 			else:
 				state = "Idle"
 		
@@ -198,6 +218,10 @@ func play_animation():
 				detect.rotation_degrees = UP
 	
 	var newAnim = head + state + dir
+	
+	if anim.animation == "P_FallRight" and newAnim == "P_IdleRight" and canPlaySound:
+		play_snd("Fall")
+		
 	if anim.animation != newAnim:
 		anim.animation = newAnim
 		anim.frame = 0
@@ -205,6 +229,9 @@ func play_animation():
 	if shadow.animation != state:
 		shadow.animation = state
 		shadow.frame = 0
+	
+	if state == "Grab" and velocity != Vector2(0, 0):
+		play_snd("GrabMove")
 
 func _on_WrinkleFloor_body_entered(body):
 	if body.name == "Player":
@@ -224,7 +251,17 @@ func _on_Hint_animation_finished():
 			get_door_open()
 
 func get_door_open():
-	var door = get_parent().get_node("T_Door")
-	print(door)
-	if door != null and door.has_method("open_door"):
-		door.open_door(isPlatform)
+	var doors = get_tree().get_nodes_in_group("door")
+	if doors != null:
+		for door in doors:
+			if door.has_method("open_door"):
+				door.open_door(isPlatform)
+
+func _on_Timer_timeout():
+	canChange = true
+
+func _on_SoundAnim_animation_finished(anim_name):
+	canPlaySound = true
+
+func _on_PlayerAnimation_frame_changed():
+	pass # Replace with function body.

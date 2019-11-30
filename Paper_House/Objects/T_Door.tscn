@@ -1,18 +1,19 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Objects/T_Door.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Miscs/T_Door/T_Door1.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Miscs/T_Door/T_Door2.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Miscs/T_Door/T_Door3.png" type="Texture" id=4]
 [ext_resource path="res://Resources/Miscs/T_Door/T_Door4.png" type="Texture" id=5]
-[ext_resource path="res://Resources/Miscs/T_DoorOp_change/T_DoorOp_change1.png" type="Texture" id=6]
-[ext_resource path="res://Resources/Miscs/T_DoorOp_change/T_DoorOp_change2.png" type="Texture" id=7]
-[ext_resource path="res://Resources/Miscs/T_DoorOp_change/T_DoorOp_change3.png" type="Texture" id=8]
-[ext_resource path="res://Resources/Miscs/T_DoorOp_change/T_DoorOp_change4.png" type="Texture" id=9]
-[ext_resource path="res://Resources/Miscs/T_DoorCl_change/T_DoorCl_change1.png" type="Texture" id=10]
-[ext_resource path="res://Resources/Miscs/T_DoorCl_change/T_DoorCl_change2.png" type="Texture" id=11]
-[ext_resource path="res://Resources/Miscs/T_DoorCl_change/T_DoorCl_change3.png" type="Texture" id=12]
-[ext_resource path="res://Resources/Miscs/T_DoorCl_change/T_DoorCl_change4.png" type="Texture" id=13]
+[ext_resource path="res://Resources/Miscs/T_Door/T_DoorOp_change1.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Miscs/T_Door/T_DoorOp_change2.png" type="Texture" id=7]
+[ext_resource path="res://Resources/Miscs/T_Door/T_DoorOp_change3.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Miscs/T_Door/T_DoorOp_change4.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Miscs/T_Door/T_DoorCl_change1.png" type="Texture" id=10]
+[ext_resource path="res://Resources/Miscs/T_Door/T_DoorCl_change2.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Miscs/T_Door/T_DoorCl_change3.png" type="Texture" id=12]
+[ext_resource path="res://Resources/Miscs/T_Door/T_DoorCl_change4.png" type="Texture" id=13]
+[ext_resource path="res://Resources/Sounds/doorOpen_2.ogg" type="AudioStream" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -63,4 +64,9 @@ disabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, 26 )
 shape = SubResource( 4 )
+
+[node name="AudioOpenDoor" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 14 )
+attenuation = 0.63728
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="finished" from="AudioOpenDoor" to="." method="_on_AudioOpenDoor_finished"]
