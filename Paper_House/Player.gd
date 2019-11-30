@@ -78,6 +78,17 @@ func get_input():
 	var _interacting = Input.is_action_pressed("interact")
 	var _jump = Input.is_action_pressed("jump")
 	var _switch = Input.is_action_just_pressed("switch")
+	var _quit = Input.is_action_just_pressed("exit_game")
+	var _toggle = Input.is_action_just_pressed("toggle_full")
+	
+	if _quit:
+		get_tree().quit()
+	
+	if _toggle:
+		if OS.is_window_fullscreen():
+			OS.window_fullscreen = false
+		else:
+			OS.window_fullscreen = true
 	
 	# change genre
 	if isPlatform:
