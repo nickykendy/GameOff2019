@@ -4,7 +4,9 @@ onready var spr = $AnimatedSprite
 onready var T_col = $T_CollisionShape2D
 onready var P_col = $P_CollisionShape2D
 onready var snd = $SoundPlayer
+
 var isOpen = false
+export var next_scene = "res://Levels/Level_2.tscn"
 
 func open_door(newGenre):
 	snd.play("OpenDoor")
@@ -21,7 +23,7 @@ func open_door(newGenre):
 func _on_Area2D_body_entered(body):
 	var player = get_tree().get_nodes_in_group("player")
 	if body == player[0] and isOpen:
-		print("Enter next room!")
+		get_tree().change_scene(next_scene)
 
 func change(newGenre):
 	if newGenre: # platform

@@ -1,16 +1,16 @@
-[gd_scene load_steps=103 format=2]
+[gd_scene load_steps=102 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Other/PICK.png" type="Texture" id=2]
-[ext_resource path="res://Resources/Other/Progress/ProgressBG1.png" type="Texture" id=3]
-[ext_resource path="res://Resources/Other/Progress/ProgressBG2.png" type="Texture" id=4]
-[ext_resource path="res://Resources/Other/Progress/ProgressBG3.png" type="Texture" id=5]
-[ext_resource path="res://Resources/Other/Progress/ProgressBG4.png" type="Texture" id=6]
-[ext_resource path="res://Resources/Other/Progress/ProgressBG5.png" type="Texture" id=7]
-[ext_resource path="res://Resources/Other/Progress/ProgressBG6.png" type="Texture" id=8]
-[ext_resource path="res://Resources/Other/Progress/ProgressBG7.png" type="Texture" id=9]
-[ext_resource path="res://Resources/Other/GRAB.png" type="Texture" id=10]
-[ext_resource path="res://Resources/Other/CRACK.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Other/CRACK.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Other/GRAB.png" type="Texture" id=4]
+[ext_resource path="res://Resources/Other/Progress/ProgressBG1.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Other/Progress/ProgressBG2.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Other/Progress/ProgressBG3.png" type="Texture" id=7]
+[ext_resource path="res://Resources/Other/Progress/ProgressBG4.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Other/Progress/ProgressBG5.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Other/Progress/ProgressBG6.png" type="Texture" id=10]
+[ext_resource path="res://Resources/Other/Progress/ProgressBG7.png" type="Texture" id=11]
 [ext_resource path="res://Resources/Player/T_Shadow/PlayerShadow1.png" type="Texture" id=12]
 [ext_resource path="res://Resources/Player/T_Shadow/PlayerShadow2.png" type="Texture" id=13]
 [ext_resource path="res://Resources/Player/T_Shadow/PlayerShadow3.png" type="Texture" id=14]
@@ -87,12 +87,11 @@
 [ext_resource path="res://Resources/Player/T_GrabUp/TDPlayerGrabUp2.png" type="Texture" id=85]
 [ext_resource path="res://Resources/Player/T_GrabUp/TDPlayerGrabUp3.png" type="Texture" id=86]
 [ext_resource path="res://Resources/Player/T_GrabUp/TDPlayerGrabUp4.png" type="Texture" id=87]
-[ext_resource path="res://icon.png" type="Texture" id=88]
-[ext_resource path="res://Camera2D.gd" type="Script" id=89]
-[ext_resource path="res://Resources/Sounds/footstep09.ogg" type="AudioStream" id=90]
-[ext_resource path="res://Resources/Sounds/metalLatch.ogg" type="AudioStream" id=91]
-[ext_resource path="res://Resources/Sounds/footstep01.ogg" type="AudioStream" id=92]
-[ext_resource path="res://Resources/Sounds/drawKnife2.ogg" type="AudioStream" id=93]
+[ext_resource path="res://Camera2D.gd" type="Script" id=88]
+[ext_resource path="res://Resources/Sounds/footstep09.ogg" type="AudioStream" id=89]
+[ext_resource path="res://Resources/Sounds/metalLatch.ogg" type="AudioStream" id=90]
+[ext_resource path="res://Resources/Sounds/footstep01.ogg" type="AudioStream" id=91]
+[ext_resource path="res://Resources/Sounds/drawKnife2.ogg" type="AudioStream" id=92]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -101,33 +100,33 @@ animations = [ {
 "name": "PICK",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": false,
-"name": "PROGRESS",
+"name": "CRACK",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": false,
 "name": "GRAB",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": false,
-"name": "CRACK",
+"name": "PROGRESS",
 "speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
-"loop": true,
-"name": "Move",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
 "loop": true,
 "name": "Grab",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "Move",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 12 ) ],
 "loop": true,
@@ -347,7 +346,7 @@ playing = true
 [node name="PlayerAnimation" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
 animation = "T_MoveRight"
-frame = 3
+frame = 6
 playing = true
 
 [node name="T_CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -366,16 +365,11 @@ rotation = 4.71239
 enabled = true
 cast_to = Vector2( 0, 20 )
 
-[node name="icon" type="Sprite" parent="GrabDetect"]
-position = Vector2( -0.272247, 12.0297 )
-scale = Vector2( 0.0362183, 0.376706 )
-texture = ExtResource( 88 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
-script = ExtResource( 89 )
+script = ExtResource( 88 )
 DESIRED_RESOLUTION = Vector2( 1280, 800 )
 
 [node name="SoundAnim" type="AnimationPlayer" parent="."]
@@ -390,16 +384,16 @@ anims/Land = SubResource( 9 )
 wait_time = 0.5
 
 [node name="AudioFootstep" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 90 )
+stream = ExtResource( 89 )
 
 [node name="AudioChangeGenre" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 91 )
+stream = ExtResource( 90 )
 
 [node name="AudioLand" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 92 )
+stream = ExtResource( 91 )
 
 [node name="AudioGrabMove" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 93 )
+stream = ExtResource( 92 )
 volume_db = 24.0
 [connection signal="animation_finished" from="Hint" to="." method="_on_Hint_animation_finished"]
 [connection signal="animation_finished" from="SoundAnim" to="." method="_on_SoundAnim_animation_finished"]
