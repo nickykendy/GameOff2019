@@ -22,6 +22,7 @@ tile_data = PoolIntArray( -524304, 5, 0, -524303, 5, 0, -524302, 5, 0, -524301, 
 
 [node name="WallUpLayer" type="Node2D" parent="."]
 pause_mode = 1
+editor/display_folded = true
 z_index = -1
 
 [node name="WallUp" parent="WallUpLayer" groups=[
@@ -64,46 +65,40 @@ position = Vector2( 224, 64 )
 ] instance=ExtResource( 2 )]
 position = Vector2( 256, 64 )
 
-[node name="WallUp9" parent="WallUpLayer" groups=[
-"wall",
-] instance=ExtResource( 2 )]
-position = Vector2( 288, 64 )
-
 [node name="WallUp10" parent="WallUpLayer" groups=[
 "wall",
 ] instance=ExtResource( 2 )]
 position = Vector2( 320, 64 )
 
-[node name="T_Door" parent="WallUpLayer" groups=[
-"door",
-] instance=ExtResource( 3 )]
-position = Vector2( 282.368, 62.8789 )
+[node name="T_Door" parent="WallUpLayer" instance=ExtResource( 3 )]
+position = Vector2( 288, 62 )
 
 [node name="ObjectLayer" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="StoneDeskV" parent="ObjectLayer" instance=ExtResource( 4 )]
-position = Vector2( 54.0993, 180.044 )
+position = Vector2( 128, 172.228 )
 
 [node name="StoneDeskV2" parent="ObjectLayer" instance=ExtResource( 4 )]
-position = Vector2( 163.928, 180.587 )
+position = Vector2( 237.829, 172.771 )
 
 [node name="StoneDeskH" parent="ObjectLayer" instance=ExtResource( 5 )]
-position = Vector2( 85.1305, 206.348 )
+position = Vector2( 159.031, 198.532 )
 
 [node name="StoneDeskH3" parent="ObjectLayer" instance=ExtResource( 5 )]
-position = Vector2( 132.714, 153.816 )
+position = Vector2( 206.615, 146 )
 
 [node name="StoneDeskH4" parent="ObjectLayer" instance=ExtResource( 5 )]
-position = Vector2( 84.4655, 153.816 )
+position = Vector2( 158.366, 146 )
 
 [node name="StoneDeskH2" parent="ObjectLayer" instance=ExtResource( 5 )]
-position = Vector2( 133.331, 206.335 )
+position = Vector2( 207.232, 198.519 )
 
 [node name="P_Key" parent="ObjectLayer" instance=ExtResource( 6 )]
-position = Vector2( 107.293, 178.108 )
+position = Vector2( 181.194, 170.292 )
 
 [node name="Player" parent="ObjectLayer" instance=ExtResource( 7 )]
-position = Vector2( 179.573, 179.353 )
+position = Vector2( 48, 240 )
 
 [node name="WallDownLayer" type="Node2D" parent="."]
 editor/display_folded = true

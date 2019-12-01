@@ -45,6 +45,7 @@ func _ready():
 		for wrinkle in wrinkles:
 			wrinkle.connect("body_entered", self, "_on_WrinkleFloor_body_entered")
 			wrinkle.connect("body_exited", self, "_on_WrinkleFloor_body_exited")
+			detect.add_exception(wrinkle)
 
 func _physics_process(delta):
 	get_input()
@@ -66,8 +67,9 @@ func change_genre(value):
 	cd.start(0.2)
 
 func play_snd(snd):
-	sound.play(snd)
-	canPlaySound = false
+	if !sound.is_playing():
+		sound.play(snd)
+		canPlaySound = false
 	
 func get_input():
 	var _right = Input.is_action_pressed("move_right")
@@ -80,6 +82,7 @@ func get_input():
 	var _switch = Input.is_action_just_pressed("switch")
 	var _quit = Input.is_action_just_pressed("exit_game")
 	var _toggle = Input.is_action_just_pressed("toggle_full")
+	var _restart = Input.is_action_just_pressed("restart")
 	
 	if _quit:
 		get_tree().quit()
@@ -90,12 +93,16 @@ func get_input():
 		else:
 			OS.window_fullscreen = true
 	
+	if _restart:
+		get_tree().reload_current_scene()
+	
 	# change genre
 	if isPlatform:
 		# to topdown
 		if _switch and canChangeGenre == 0 and canChange:
 			change_genre(TOPDOWN_GENRE)
 			detect.collide_with_areas = false
+			detect.position = Vector2(0, 10)
 			P_col.disabled = true
 			T_col.disabled = false
 	else:
@@ -103,6 +110,7 @@ func get_input():
 		if _switch and canChangeGenre == 0 and canChange:
 			change_genre(PLATFORM_GENRE)
 			detect.collide_with_areas = true
+			detect.position = Vector2(0, 0)
 			P_col.disabled = false
 			T_col.disabled = true
 	
@@ -136,6 +144,15 @@ func get_input():
 	if !isPlatform and collider != null and collider.is_in_group("platform") and !_interact and !_interacting:
 		hint.visible = true
 		hint.animation = "GRAB"
+	# enter door
+	elif !isPlatform and collider != null and collider.is_in_group("door"):
+		var isOpen = collider.get_isOpen()
+		if isOpen and !_interact and !_interacting:
+			hint.visible = true
+			hint.animation = "ENTER"
+		elif isOpen and _interact:
+			hint.visible = false
+			collider.enter_door()
 	# crack a pad
 	elif isPlatform and collider != null and collider.is_in_group("pad"):
 		hint.visible = true
@@ -157,12 +174,13 @@ func get_input():
 			hint.animation = "PICK"
 	else:
 		hint.visible = false
+	
 	# grab
 	if !isPlatform and collider != null and collider.has_method("grabbed"):
 		if _interact and _interacting and !isGrabbed:
 			collider.grabbed(true)
 			isGrabbed = true
-		if !_interacting and isGrabbed:
+		elif !_interacting and isGrabbed:
 			collider.grabbed(false)
 			isGrabbed = false
 	else:
@@ -226,8 +244,9 @@ func play_animation():
 	
 	var newAnim = head + state + dir
 	
-	if anim.animation == "P_FallRight" and newAnim == "P_IdleRight" and canPlaySound:
-		play_snd("Fall")
+	if canPlaySound and newAnim == "P_IdleLeft" or newAnim == "P_IdleRight":
+		if anim.animation == "P_FallRight" or anim.animation == "P_FallLeft":
+			play_snd("Land")
 		
 	if anim.animation != newAnim:
 		anim.animation = newAnim

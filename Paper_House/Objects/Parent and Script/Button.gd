@@ -2,6 +2,7 @@ extends Area2D
 
 onready var spr = $AnimatedSprite
 onready var T_col = $T_CollisionShape2D
+onready var snd = $AnimationPlayer
 
 var isPressed = false
 
@@ -19,6 +20,7 @@ func change(newGenre):
 func _on_Button_body_entered(body):
 	if T_col.disabled == false and body.is_in_group("heavy") and !isPressed:
 		spr.play("pressed", false)
+		snd.play("click")
 		isPressed = true
 
 func _on_Button_body_exited(body):
@@ -26,6 +28,7 @@ func _on_Button_body_exited(body):
 		var bodies = get_overlapping_bodies()
 		if bodies.size() == 1:
 			spr.play("released", false)
+			snd.play("click")
 			isPressed = false
 
 func _on_AnimatedSprite_animation_finished():

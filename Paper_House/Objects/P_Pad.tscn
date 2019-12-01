@@ -27,8 +27,8 @@ animations = [ {
 extents = Vector2( 7, 15 )
 
 [node name="P_Pad" type="Area2D" groups=[
-"pad",
 "changeable",
+"pad",
 ]]
 script = ExtResource( 1 )
 

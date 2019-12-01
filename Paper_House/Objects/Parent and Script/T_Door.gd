@@ -20,9 +20,11 @@ func open_door(newGenre):
 		spr.frame = 0
 	isOpen = true
 
-func _on_Area2D_body_entered(body):
-	var player = get_tree().get_nodes_in_group("player")
-	if body == player[0] and isOpen:
+func get_isOpen():
+	return isOpen
+	
+func enter_door():
+	if isOpen:
 		get_tree().change_scene(next_scene)
 
 func change(newGenre):

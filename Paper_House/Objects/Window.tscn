@@ -1,33 +1,33 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Objects/Parent and Script/Window.gd" type="Script" id=1]
-[ext_resource path="res://Resources/Miscs/T_Window/T_Window_change4.png" type="Texture" id=2]
-[ext_resource path="res://Resources/Miscs/T_Window/T_Window1.png" type="Texture" id=3]
-[ext_resource path="res://Resources/Miscs/T_Window/T_Window2.png" type="Texture" id=4]
-[ext_resource path="res://Resources/Miscs/T_Window/T_Window3.png" type="Texture" id=5]
-[ext_resource path="res://Resources/Miscs/T_Window/T_Window4.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Miscs/T_Window/T_Window1.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Miscs/T_Window/T_Window2.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Miscs/T_Window/T_Window3.png" type="Texture" id=4]
+[ext_resource path="res://Resources/Miscs/T_Window/T_Window4.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Miscs/T_Window/T_Window_change4.png" type="Texture" id=6]
 [ext_resource path="res://Resources/Miscs/T_Window/T_Window_change3.png" type="Texture" id=7]
 [ext_resource path="res://Resources/Miscs/T_Window/T_Window_change2.png" type="Texture" id=8]
 [ext_resource path="res://Resources/Miscs/T_Window/T_Window_change1.png" type="Texture" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": false,
-"name": "closed",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "open",
 "speed": 3.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 6 ) ],
+"loop": false,
+"name": "closed",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": false,
 "name": "opening",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 2 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ) ],
 "loop": false,
 "name": "closing",
 "speed": 10.0
@@ -37,8 +37,8 @@ animations = [ {
 extents = Vector2( 32, 24 )
 
 [node name="Window" type="StaticBody2D" groups=[
-"window",
 "changeable",
+"window",
 ]]
 script = ExtResource( 1 )
 

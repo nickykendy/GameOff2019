@@ -5,7 +5,6 @@
 [ext_resource path="res://Resources/Miscs/BigDesk/BigDesk2.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Miscs/BigDesk/BigDesk3.png" type="Texture" id=4]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
