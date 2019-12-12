@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Tiles/TileSets.tres" type="TileSet" id=1]
-[ext_resource path="res://Tiles/WrinkleFloor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/WrinkleFloor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Tiles/WallUp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Objects/T_Door.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Objects/RaisedFloor.tscn" type="PackedScene" id=5]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Tiles/WallDown.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Tiles/WallLeftDown.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Tiles/WallRightDown.tscn" type="PackedScene" id=14]
+
 
 [node name="Level_2" type="Node2D"]
 

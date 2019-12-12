@@ -33,8 +33,8 @@ onready var T_col = $T_CollisionShape2D
 onready var P_col = $P_CollisionShape2D
 onready var hint = $Hint
 onready var sound = $SoundAnim
-onready var snd_footstep = $AudioFootstep
-onready var snd_change = $AudioChangeGenre
+onready var snd_change = $SwitchSoundAnim
+onready var snd_land = $LandSoundAnim
 onready var cd = $Timer
 
 
@@ -43,9 +43,11 @@ func _ready():
 	var wrinkles = get_tree().get_nodes_in_group("wrinkles")
 	if wrinkles != null:
 		for wrinkle in wrinkles:
-			wrinkle.connect("body_entered", self, "_on_WrinkleFloor_body_entered")
-			wrinkle.connect("body_exited", self, "_on_WrinkleFloor_body_exited")
-			detect.add_exception(wrinkle)
+			var area = wrinkle.area
+			area.connect("body_entered", self, "_on_Area2D_body_entered")
+			area.connect("body_exited", self, "_on_Area2D_body_exited")
+			if !wrinkle.is_in_group("key"):
+				detect.add_exception(wrinkle)
 
 func _physics_process(delta):
 	get_input()
@@ -61,8 +63,8 @@ func _physics_process(delta):
 
 func change_genre(value):
 	canChange = false
-	play_snd("ChangeGenre")
-	canPlaySound = false
+	snd_change.play("ChangeGenre")
+#	canPlaySound = false
 	isPlatform = value
 	cd.start(0.2)
 
@@ -161,9 +163,13 @@ func get_input():
 				hint.animation = "PROGRESS"
 				hint.frame = 0
 				hint.play()
+			
+			if hint.animation == "PROGRESS":
+				play_snd("Cracking")
 		else:
 			hint.stop()
 			hint.animation = "CRACK"
+	# pick the key
 	elif !isPlatform and collider != null and collider.is_in_group("key"):
 		if _interact and collider.has_method("is_picked"):
 			collider.is_picked()
@@ -244,9 +250,9 @@ func play_animation():
 	
 	var newAnim = head + state + dir
 	
-	if canPlaySound and newAnim == "P_IdleLeft" or newAnim == "P_IdleRight":
+	if newAnim == "P_IdleLeft" or newAnim == "P_IdleRight" or newAnim == "P_MoveRight" or newAnim == "P_MoveLeft":
 		if anim.animation == "P_FallRight" or anim.animation == "P_FallLeft":
-			play_snd("Land")
+			snd_land.play("Land")
 		
 	if anim.animation != newAnim:
 		anim.animation = newAnim
@@ -259,11 +265,11 @@ func play_animation():
 	if state == "Grab" and velocity != Vector2(0, 0):
 		play_snd("GrabMove")
 
-func _on_WrinkleFloor_body_entered(body):
+func _on_Area2D_body_entered(body):
 	if body.name == "Player":
 		canChangeGenre += 1
 
-func _on_WrinkleFloor_body_exited(body):
+func _on_Area2D_body_exited(body):
 	if body.name == "Player":
 		canChangeGenre -= 1
 

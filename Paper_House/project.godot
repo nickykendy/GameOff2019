@@ -19,6 +19,10 @@ config/name="Paper_House"
 run/main_scene="res://Levels/Start.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+BGM="*res://BGM.tscn"
+
 [display]
 
 window/size/width=480
@@ -126,5 +130,7 @@ restart={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
+quality/2d/gles2_use_nvidia_rect_flicker_workaround=true
 quality/2d/use_pixel_snap=true
 environment/default_environment="res://default_env.tres"

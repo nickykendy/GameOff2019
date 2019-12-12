@@ -11,28 +11,31 @@ texture = ExtResource( 2 )
 centered = false
 
 [node name="TextEdit" type="TextEdit" parent="."]
-margin_left = 64.0
-margin_top = 32.0
-margin_right = 416.0
-margin_bottom = 144.0
+margin_left = 32.0
+margin_top = 28.0
+margin_right = 448.0
+margin_bottom = 208.0
 text = "   Congratulations! You beat the game!
 
   Art, Program and Design by Nicky Kendy Hua.
-   Use RPG Sounds by Kenney Vleugels.
+   Sound is using RPG Sounds by Kenney Vleugels.
+ Music is using \"Wallpaper\" and \"Scheming Weasel (faster version)\" by Kevin MacLeod (https://incompetech.com)
+License: CC BY (http://creativecommons.org/licenses/by/4.0/)
 
   Thank you for playing my game."
+wrap_enabled = true
 
 [node name="Button_back" type="Button" parent="."]
-margin_left = 176.0
-margin_top = 192.0
-margin_right = 296.0
-margin_bottom = 222.0
+margin_left = 299.0
+margin_top = 240.0
+margin_right = 419.0
+margin_bottom = 270.0
 text = "Back To Title"
 
 [node name="Button_quit" type="Button" parent="."]
-margin_left = 176.0
+margin_left = 64.0
 margin_top = 242.0
-margin_right = 296.0
+margin_right = 184.0
 margin_bottom = 272.0
 text = "Exit Game"
 [connection signal="pressed" from="Button_back" to="." method="_on_Button_back_pressed"]

@@ -2,7 +2,7 @@ extends StaticBody2D
 
 onready var spr = $AnimatedSprite
 onready var T_col = $T_CollisionShape2D
-
+onready var area = $Area2D
 	
 func is_picked():
 	queue_free()
