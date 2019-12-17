@@ -47,7 +47,7 @@ func _ready():
 			area.connect("body_entered", self, "_on_Area2D_body_entered")
 			area.connect("body_exited", self, "_on_Area2D_body_exited")
 			if !wrinkle.is_in_group("key"):
-				detect.add_exception(wrinkle)
+				detect.add_exception(area)
 
 func _physics_process(delta):
 	get_input()
@@ -141,6 +141,7 @@ func get_input():
 	
 	# get detect collider
 	var collider = detect.get_collider()
+	#print(collider)
 	
 	# grab hint
 	if !isPlatform and collider != null and collider.is_in_group("platform") and !_interact and !_interacting:

@@ -15,7 +15,6 @@
 [ext_resource path="res://Tiles/WallLeftDown.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Tiles/WallRightDown.tscn" type="PackedScene" id=14]
 
-
 [node name="Level_2" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
