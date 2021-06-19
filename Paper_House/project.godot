@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Platform",
+"language": "GDScript",
+"path": "res://Scripts/Platform.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scripts/Player.gd"
+} ]
 _global_script_class_icons={
-
+"Platform": "",
+"Player": ""
 }
 
 [application]
@@ -19,9 +30,13 @@ config/name="Paper_House"
 run/main_scene="res://Levels/Start.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+default_bus_layout="res://Sound/default_bus_layout.tres"
+
 [autoload]
 
-BGM="*res://BGM.tscn"
+BGM="*res://Scenes/BGM.tscn"
 
 [display]
 
@@ -132,6 +147,7 @@ restart={
 
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
-quality/2d/use_pixel_snap=true
+2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"
 quality/dynamic_fonts/use_oversampling=false
+quality/2d/use_pixel_snap=true

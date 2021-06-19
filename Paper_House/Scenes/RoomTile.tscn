@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/RoomTile.tres" type="TileSet" id=1]
+[ext_resource path="res://Scripts/RoomTile.gd" type="Script" id=2]
+
+[node name="RoomTile" type="TileMap" groups=[
+"changeable",
+]]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 32 )
+format = 1
+tile_data = PoolIntArray( 196611, 0, 65537, 196612, 0, 65537, 196613, 0, 65537, 196614, 0, 65537, 196615, 0, 65537, 196616, 0, 65537, 262147, 0, 65537, 262148, 0, 65537, 262149, 0, 65537, 262150, 0, 65537, 262151, 0, 65537, 262152, 0, 65537, 327683, 0, 65537, 327684, 0, 65537, 327685, 0, 65537, 327686, 0, 65537, 327687, 0, 65537, 327688, 0, 65537 )
+script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.075
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

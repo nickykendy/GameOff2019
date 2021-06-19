@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/4604-wallpaper-by-kevin-macleod.ogg-9898b8035dfb418dc2b14b2a3e0890f5.oggstr"
+
+[deps]
+
+source_file="res://Sound/Music/4604-wallpaper-by-kevin-macleod.ogg"
+dest_files=[ "res://.import/4604-wallpaper-by-kevin-macleod.ogg-9898b8035dfb418dc2b14b2a3e0890f5.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
