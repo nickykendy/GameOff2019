@@ -44,6 +44,7 @@ position = Vector2( 181.194, 170.292 )
 
 [node name="T_Door" parent="ObjectLayer" instance=ExtResource( 3 )]
 position = Vector2( 288, 78 )
+next_scene = "res://Levels/Level_2.tscn"
 
 [node name="Player" parent="ObjectLayer" instance=ExtResource( 7 )]
 position = Vector2( 48, 240 )

@@ -3,6 +3,7 @@ extends TileMap
 var state : = "t"
 var tile : TileSet
 var n : = 1
+var frame_time : = 0.075
 onready var s1 : = preload("res://Sprites/Tiles/TileSprite1.png")
 onready var s2 : = preload("res://Sprites/Tiles/TileSprite2.png")
 onready var s3 : = preload("res://Sprites/Tiles/TileSprite3.png")
@@ -16,10 +17,10 @@ func _ready() -> void:
 func change(newGenre : bool) -> void:
 	if state == "t":
 		state = "t2p"
-		$Timer.start()
+		$Timer.start(frame_time)
 	elif state == "p":
 		state = "p2t"
-		$Timer.start()
+		$Timer.start(frame_time)
 
 
 func _on_Timer_timeout() -> void:

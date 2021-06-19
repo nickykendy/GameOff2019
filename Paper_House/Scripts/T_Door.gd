@@ -6,7 +6,7 @@ onready var P_col : = $P_CollisionShape2D
 onready var snd : = $SoundPlayer
 
 var isOpen : = false
-export var next_scene : = "res://Levels/Level_2.tscn"
+export var next_scene : String
 
 
 func open_door(newGenre : bool) -> void:
@@ -20,15 +20,6 @@ func open_door(newGenre : bool) -> void:
 		spr.animation = "OpenChange"
 		spr.frame = 0
 	isOpen = true
-
-
-func get_isOpen() -> bool:
-	return isOpen
-
-
-func enter_door() -> void:
-	if isOpen:
-		get_tree().change_scene(next_scene)
 
 
 func change(newGenre : bool) -> void:

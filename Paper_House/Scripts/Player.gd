@@ -9,6 +9,7 @@ const T_SPD : = 150
 const G_SPD : = 100
 const JUMP_PWR : = -400
 const GRAV : = 15
+const MAX_FALL_SPD : = 600
 const PLATFORM : = Vector2(0, -1)
 const TOPDOWN : = Vector2(0, 0)
 const RIGHT : = 270
@@ -37,10 +38,15 @@ onready var sound : = $SoundAnim
 onready var snd_change : = $SwitchSoundAnim
 onready var snd_land : = $LandSoundAnim
 onready var cd : = $Timer
+onready var transition : = $Trans/Transition
 
 
 func _ready():
 	anim.animation = "T_IdleDown"
+	set_physics_process(false)
+	transition.fade(false)
+	yield(transition, "fade_complete")
+	set_physics_process(true)
 
 
 func _physics_process(delta : float) -> void:
@@ -56,12 +62,19 @@ func _physics_process(delta : float) -> void:
 	play_animation()
 
 
+func to_next_scene(scene : String) -> void:
+	transition.next_scene = scene
+	transition.fade(true)
+	print(transition.next_scene)
+	set_physics_process(true)
+	
+
 func change_genre(value : bool) -> void:
 	canChange = false
 	snd_change.play("ChangeGenre")
 #	canPlaySound = false
 	isPlatform = value
-	cd.start(0.2)
+	cd.start(0.5)
 
 
 func play_snd(snd : String) -> void:
@@ -95,7 +108,7 @@ func get_input() -> void:
 	if _restart:
 		get_tree().reload_current_scene()
 	
-	# check wrinkle floor
+	# check the tile where player stand
 	var local_position : Vector2
 	var map_position : Vector2
 	if theFloor:
@@ -124,7 +137,7 @@ func get_input() -> void:
 	if !_switch and state == "Move" and canPlaySound:
 		play_snd("Footstep")
 		
-	# change all the walls
+	# change all the "changeable" objects
 	if _switch and theFloor and theFloor.get_cellv(map_position) == 0:
 		var changeables = get_tree().get_nodes_in_group("changeable")
 		for _changeable in changeables:
@@ -138,6 +151,8 @@ func get_input() -> void:
 			velocity.y = JUMP_PWR
 		else:
 			velocity.y += GRAV
+			if velocity.y >= MAX_FALL_SPD:
+				velocity.y = MAX_FALL_SPD
 	else:
 		velocity.x = int(_right) - int(_left)
 		velocity.y = int(_down) - int(_up)
@@ -152,14 +167,14 @@ func get_input() -> void:
 		hint.visible = true
 		hint.animation = "GRAB"
 	# enter door
-	elif !isPlatform and collider != null and collider.is_in_group("door"):
-		var isOpen = collider.get_isOpen()
+	elif !isPlatform and collider and collider.is_in_group("door"):
+		var isOpen = collider.isOpen
 		if isOpen and !_interact and !_interacting:
 			hint.visible = true
 			hint.animation = "ENTER"
 		elif isOpen and _interact:
 			hint.visible = false
-			collider.enter_door()
+			to_next_scene(collider.next_scene)
 	# crack a pad
 	elif isPlatform and collider != null and collider.is_in_group("pad"):
 		hint.visible = true
