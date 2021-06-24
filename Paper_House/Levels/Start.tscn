@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Start.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Other/Sprite-0001.png" type="Texture" id=2]
+[ext_resource path="res://Assets/myFont.tres" type="DynamicFont" id=3]
 
 [node name="Start" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,13 +16,18 @@ margin_left = 64.0
 margin_top = 160.0
 margin_right = 184.0
 margin_bottom = 190.0
+custom_fonts/font = ExtResource( 3 )
 text = "Start Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Button_Toggle" type="Button" parent="."]
 margin_left = 64.0
 margin_top = 200.0
 margin_right = 184.0
 margin_bottom = 230.0
+custom_fonts/font = ExtResource( 3 )
 text = "Toggle Full"
 
 [node name="Button_Exit" type="Button" parent="."]
@@ -29,11 +35,11 @@ margin_left = 64.0
 margin_top = 240.0
 margin_right = 184.0
 margin_bottom = 270.0
+custom_fonts/font = ExtResource( 3 )
 text = "Quit Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
 [connection signal="pressed" from="Button_Start" to="." method="_on_Button_Start_pressed"]
 [connection signal="pressed" from="Button_Toggle" to="." method="_on_Button_Toggle_pressed"]
 [connection signal="pressed" from="Button_Exit" to="." method="_on_Button_Exit_pressed"]

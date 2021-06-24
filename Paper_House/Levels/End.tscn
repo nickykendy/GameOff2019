@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/End.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Other/Sprite-0002.png" type="Texture" id=2]
+[ext_resource path="res://Assets/myFont.tres" type="DynamicFont" id=3]
 
 [node name="End" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,6 +16,7 @@ margin_left = 32.0
 margin_top = 28.0
 margin_right = 448.0
 margin_bottom = 208.0
+custom_fonts/font = ExtResource( 3 )
 text = "   Congratulations! You beat the game!
 
   Art, Program and Design by Nicky Kendy Hua.
@@ -24,12 +26,16 @@ License: CC BY (http://creativecommons.org/licenses/by/4.0/)
 
   Thank you for playing my game."
 wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Button_back" type="Button" parent="."]
 margin_left = 299.0
 margin_top = 240.0
 margin_right = 419.0
 margin_bottom = 270.0
+custom_fonts/font = ExtResource( 3 )
 text = "Back To Title"
 
 [node name="Button_quit" type="Button" parent="."]
@@ -37,6 +43,7 @@ margin_left = 64.0
 margin_top = 242.0
 margin_right = 184.0
 margin_bottom = 272.0
+custom_fonts/font = ExtResource( 3 )
 text = "Exit Game"
 [connection signal="pressed" from="Button_back" to="." method="_on_Button_back_pressed"]
 [connection signal="pressed" from="Button_quit" to="." method="_on_Button_quit_pressed"]

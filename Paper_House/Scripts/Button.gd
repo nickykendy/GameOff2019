@@ -53,6 +53,7 @@ func _press() -> void:
 	
 func _release() -> void:
 	var bodies : = get_overlapping_bodies()
+	print(bodies)
 	if bodies.size() == 0:
 		spr.play("released", false)
 		snd.play("click")

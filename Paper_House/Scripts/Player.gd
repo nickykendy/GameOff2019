@@ -28,8 +28,9 @@ var canChange : = true
 var canPlaySound : = true
 
 onready var theFloor : = get_parent().get_node("../Floor")
+onready var theUpWall : = get_parent().get_node("../Up")
 onready var detect : = $GrabDetect
-onready var anim : = $PlayerAnimation
+onready var anim : = $Viewport/PlayerAnimation
 onready var shadow : = $AnimatedShadow
 onready var T_col : = $T_CollisionShape2D
 onready var P_col : = $P_CollisionShape2D
@@ -107,42 +108,32 @@ func get_input() -> void:
 	
 	if _restart:
 		get_tree().reload_current_scene()
-	
-	# check the tile where player stand
-	var local_position : Vector2
-	var map_position : Vector2
-	if theFloor:
-		local_position = theFloor.to_local(global_position)
-		map_position = theFloor.world_to_map(local_position)
 		
 	# change genre
 	if isPlatform:
 		# to topdown
-		if _switch and theFloor and theFloor.get_cellv(map_position) == 0 and canChange:
+		if _switch and theFloor and _get_pos_on_tile_index(theFloor, global_position) != 1 and canChange:
 			change_genre(TOPDOWN_GENRE)
 			detect.collide_with_areas = false
-			detect.position = Vector2(0, 10)
 			P_col.disabled = true
 			T_col.disabled = false
+			_switch_changeables()
 	else:
 		# to platform
-		if _switch and theFloor and theFloor.get_cellv(map_position) == 0 and canChange:
+		if _switch and theFloor and _get_pos_on_tile_index(theFloor, global_position) != 1 and canChange:
 			change_genre(PLATFORM_GENRE)
 			detect.collide_with_areas = true
-			detect.position = Vector2(0, 0)
+			var _pos : = global_position
+			while _get_pos_on_tile_index(theUpWall, _pos) != -1 and _pos.y - 8 <= global_position.y:
+				_pos.y = _pos.y + 1
+			global_position = _pos
 			P_col.disabled = false
 			T_col.disabled = true
+			_switch_changeables()
 	
 	# play footstep sound
 	if !_switch and state == "Move" and canPlaySound:
 		play_snd("Footstep")
-		
-	# change all the "changeable" objects
-	if _switch and theFloor and theFloor.get_cellv(map_position) == 0:
-		var changeables = get_tree().get_nodes_in_group("changeable")
-		for _changeable in changeables:
-			if _changeable.has_method("change"):
-				_changeable.change(isPlatform)
 	
 	# jump
 	if isPlatform:
@@ -311,3 +302,20 @@ func _on_Timer_timeout() -> void:
 
 func _on_SoundAnim_animation_finished(anim_name) -> void:
 	canPlaySound = true
+
+
+func _get_pos_on_tile_index(tile: TileMap, pos: Vector2) -> int:
+	var local_position : Vector2
+	var map_position : Vector2
+	if tile:
+		local_position = tile.to_local(pos)
+		map_position = tile.world_to_map(local_position)
+		
+	return tile.get_cellv(map_position)
+
+
+func _switch_changeables() -> void:
+	var changeables = get_tree().get_nodes_in_group("changeable")
+	for _changeable in changeables:
+		if _changeable.has_method("change"):
+			_changeable.change(isPlatform)

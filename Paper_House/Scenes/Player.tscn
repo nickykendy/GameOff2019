@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=2]
+[gd_scene load_steps=113 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Other/GRAB.png" type="Texture" id=2]
@@ -96,16 +96,27 @@
 [ext_resource path="res://Sound/bookFlip3.ogg" type="AudioStream" id=94]
 [ext_resource path="res://Scenes/Transition.tscn" type="PackedScene" id=95]
 
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 10, 5 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 10, 14 )
+
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 12 ) ],
-"loop": false,
-"name": "ENTER",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 11 ) ],
 "loop": false,
 "name": "CRACK",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": false,
+"name": "PICK",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": false,
+"name": "ENTER",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ) ],
@@ -117,15 +128,15 @@ animations = [ {
 "loop": false,
 "name": "PROGRESS",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": false,
-"name": "PICK",
-"speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "Move",
@@ -136,45 +147,25 @@ animations = [ {
 "name": "Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ) ],
+"frames": [  ],
 "loop": true,
-"name": "Idle",
+"name": "Fall",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
 "name": "Grab",
 "speed": 8.0
-}, {
-"frames": [  ],
-"loop": true,
-"name": "Fall",
-"speed": 5.0
 } ]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 render_priority = 1
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ) ],
-"loop": true,
-"name": "T_GrabRight",
-"speed": 8.0
-}, {
 "frames": [ ExtResource( 21 ), ExtResource( 82 ), ExtResource( 83 ), ExtResource( 84 ), ExtResource( 85 ), ExtResource( 86 ), ExtResource( 87 ), ExtResource( 88 ) ],
 "loop": true,
 "name": "T_MoveUp",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ) ],
-"loop": true,
-"name": "T_MoveDown",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 45 ) ],
-"loop": true,
-"name": "T_IdleRight",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 37 ) ],
@@ -182,24 +173,14 @@ animations = [ {
 "name": "P_IdleRight",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 22 ) ],
-"loop": true,
-"name": "T_IdleDown",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 63 ) ],
-"loop": true,
-"name": "P_JumpRight",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 21 ) ],
 "loop": true,
 "name": "T_IdleUp",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 36 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 52 ) ],
+"frames": [ ExtResource( 22 ) ],
 "loop": true,
-"name": "P_MoveLeft",
+"name": "T_IdleDown",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 30 ) ],
@@ -207,25 +188,30 @@ animations = [ {
 "name": "P_FallRight",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ) ],
+"loop": true,
+"name": "T_MoveDown",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 53 ) ],
 "loop": true,
 "name": "P_FallLeft",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 36 ) ],
+"frames": [ ExtResource( 63 ) ],
 "loop": true,
-"name": "P_IdleLeft",
+"name": "P_JumpRight",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 36 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 52 ) ],
+"loop": true,
+"name": "P_MoveLeft",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 35 ), ExtResource( 68 ), ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 72 ), ExtResource( 73 ), ExtResource( 74 ) ],
 "loop": true,
 "name": "T_MoveLeft",
 "speed": 10.0
-}, {
-"frames": [ ExtResource( 59 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 62 ) ],
-"loop": true,
-"name": "T_GrabUp",
-"speed": 8.0
 }, {
 "frames": [ ExtResource( 35 ) ],
 "loop": true,
@@ -237,14 +223,14 @@ animations = [ {
 "name": "T_GrabDown",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ) ],
+"frames": [ ExtResource( 58 ) ],
 "loop": true,
-"name": "P_MoveRight",
+"name": "P_JumpLeft",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 45 ), ExtResource( 75 ), ExtResource( 76 ), ExtResource( 77 ), ExtResource( 78 ), ExtResource( 79 ), ExtResource( 80 ), ExtResource( 81 ) ],
+"frames": [ ExtResource( 36 ) ],
 "loop": true,
-"name": "T_MoveRight",
+"name": "P_IdleLeft",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 64 ), ExtResource( 65 ), ExtResource( 66 ), ExtResource( 67 ) ],
@@ -252,19 +238,75 @@ animations = [ {
 "name": "T_GrabLeft",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 58 ) ],
+"frames": [ ExtResource( 59 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 62 ) ],
 "loop": true,
-"name": "P_JumpLeft",
+"name": "T_GrabUp",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 45 ), ExtResource( 75 ), ExtResource( 76 ), ExtResource( 77 ), ExtResource( 78 ), ExtResource( 79 ), ExtResource( 80 ), ExtResource( 81 ) ],
+"loop": true,
+"name": "T_MoveRight",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ) ],
+"loop": true,
+"name": "T_GrabRight",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ) ],
+"loop": true,
+"name": "P_MoveRight",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 45 ) ],
+"loop": true,
+"name": "T_IdleRight",
 "speed": 10.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 10, 5 )
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+	
+void fragment() {
+	float alpha = texture(TEXTURE, UV).a;
+	COLOR.b = 10.0 * alpha;
+	COLOR.a = alpha;
+}"
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 10, 14 )
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="ViewportTexture" id=6]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+// Allows you to control the output color in the Shader Params in the Inspector.
+uniform vec4 silhouette_color : hint_color;
+
+void fragment() {
+	// We sample the screen texture at this point, which has the Mask node's pixels
+	// rendered on it.
+	vec4 screen_color = texture(SCREEN_TEXTURE, SCREEN_UV);
+	vec4 tex_color = texture(TEXTURE, UV);
+	COLOR = tex_color;
+
+	// If the pixel's value is lower than the Mask's output color, it means the
+	// mask is being occluded, so we draw the silhouette instead.
+	if (screen_color.b < 10.0){
+		COLOR.rgb = silhouette_color.rgb;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+shader_param/silhouette_color = Color( 0.133333, 0.666667, 0.690196, 1 )
+
+[sub_resource type="ViewportTexture" id=9]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="Animation" id=13]
 length = 0.2
 tracks/0/type = "method"
 tracks/0/path = NodePath("../AudioCracking")
@@ -284,7 +326,7 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=14]
 length = 0.5
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -304,7 +346,7 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=15]
 length = 0.1
 step = 0.05
 tracks/0/type = "method"
@@ -325,7 +367,7 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=16]
 length = 0.2
 tracks/0/type = "method"
 tracks/0/path = NodePath("AudioChangeGenre")
@@ -345,7 +387,7 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=17]
 length = 0.2
 tracks/0/type = "method"
 tracks/0/path = NodePath("AudioLand")
@@ -371,57 +413,92 @@ tracks/0/keys = {
 ]]
 script = ExtResource( 1 )
 
-[node name="Hint" type="AnimatedSprite" parent="."]
-visible = false
-position = Vector2( 0, -24 )
-frames = SubResource( 1 )
-animation = "ENTER"
+[node name="Trans" type="Node2D" parent="."]
+z_index = 1
 
-[node name="AnimatedShadow" type="AnimatedSprite" parent="."]
-frames = SubResource( 2 )
-animation = "Jump"
-playing = true
-
-[node name="PlayerAnimation" type="AnimatedSprite" parent="."]
-material = SubResource( 3 )
-frames = SubResource( 4 )
-animation = "T_MoveRight"
-frame = 5
-playing = true
+[node name="Transition" parent="Trans" instance=ExtResource( 95 )]
+margin_left = -231.381
+margin_top = -149.79
+margin_right = 248.619
+margin_bottom = 150.21
 
 [node name="T_CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 10 )
-shape = SubResource( 5 )
+self_modulate = Color( 0.745098, 0.262745, 0.262745, 1 )
+position = Vector2( 0.132431, 9.28925 )
+shape = SubResource( 11 )
 
 [node name="P_CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -1 )
-shape = SubResource( 6 )
+self_modulate = Color( 0, 1, 0.109804, 1 )
+position = Vector2( 0.132431, 0.289246 )
+shape = SubResource( 12 )
 disabled = true
 
 [node name="GrabDetect" type="RayCast2D" parent="."]
 self_modulate = Color( 0.968627, 1, 0, 1 )
-position = Vector2( 0, 10 )
-rotation = 4.71239
+position = Vector2( 0, 9 )
+rotation = -1.5708
+scale = Vector2( 0.045, 1 )
 enabled = true
 cast_to = Vector2( 0, 20 )
+
+[node name="Hint" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -40 )
+frames = SubResource( 1 )
+animation = "ENTER"
+
+[node name="AnimatedShadow" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 16 )
+frames = SubResource( 10 )
+animation = "Jump"
+playing = true
+offset = Vector2( 0, -16 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 32, 32 )
+transparent_bg = true
+hdr = false
+usage = 0
+render_target_v_flip = true
+render_target_update_mode = 3
+
+[node name="PlayerAnimation" type="AnimatedSprite" parent="Viewport"]
+material = SubResource( 2 )
+position = Vector2( 16, 16 )
+frames = SubResource( 3 )
+animation = "T_MoveRight"
+frame = 5
+playing = true
+
+[node name="Mask" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( 0.264862, 16.1568 )
+texture = SubResource( 6 )
+offset = Vector2( 0, -16 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 8 )
+position = Vector2( 0, 16.0244 )
+z_index = 100
+texture = SubResource( 9 )
+offset = Vector2( 0, -16 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 script = ExtResource( 89 )
-DESIRED_RESOLUTION = Vector2( 1280, 800 )
 
 [node name="SoundAnim" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AudioFootstep")
 playback_speed = 2.0
-anims/Cracking = SubResource( 7 )
-anims/Footstep = SubResource( 8 )
-anims/GrabMove = SubResource( 9 )
+anims/Cracking = SubResource( 13 )
+anims/Footstep = SubResource( 14 )
+anims/GrabMove = SubResource( 15 )
 
 [node name="SwitchSoundAnim" type="AnimationPlayer" parent="."]
-anims/ChangeGenre = SubResource( 10 )
+anims/ChangeGenre = SubResource( 16 )
 
 [node name="LandSoundAnim" type="AnimationPlayer" parent="."]
-anims/Land = SubResource( 11 )
+anims/Land = SubResource( 17 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -444,12 +521,6 @@ volume_db = 24.0
 
 [node name="AudioCracking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 94 )
-
-[node name="Trans" type="Node2D" parent="."]
-z_index = 1
-
-[node name="Transition" parent="Trans" instance=ExtResource( 95 )]
-
 [connection signal="animation_finished" from="Hint" to="." method="_on_Hint_animation_finished"]
 [connection signal="animation_finished" from="SoundAnim" to="." method="_on_SoundAnim_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
