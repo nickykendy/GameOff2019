@@ -40,6 +40,7 @@ text = "Quit Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="Button_Start" to="." method="_on_Button_Start_pressed"]
 [connection signal="pressed" from="Button_Toggle" to="." method="_on_Button_Toggle_pressed"]
 [connection signal="pressed" from="Button_Exit" to="." method="_on_Button_Exit_pressed"]
