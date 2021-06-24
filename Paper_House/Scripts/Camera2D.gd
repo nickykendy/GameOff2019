@@ -1,6 +1,6 @@
 extends Camera2D
 
-export var DESIRED_RESOLUTION = Vector2(480, 300)
+export var DESIRED_RESOLUTION = Vector2(960, 600)
 var vp
 var scaling_factor = 1
 
