@@ -22,34 +22,36 @@ tile_data = PoolIntArray( 131089, 1, 0, 131090, 1, 0, 131091, 1, 0, 131092, 1, 0
 [node name="Up" parent="." instance=ExtResource( 3 )]
 tile_data = PoolIntArray( 16, 0, 0, 17, 0, 1, 18, 0, 1, 21, 0, 1, 22, 0, 1, 23, 0, 1, 24, 0, 1, 25, 0, 2, 65552, 0, 65536, 65561, 0, 65538, 131088, 0, 65536, 131097, 0, 65538, 196624, 0, 65536, 196633, 0, 65538, 262144, 0, 0, 262145, 0, 1, 262146, 0, 1, 262147, 0, 1, 262148, 0, 1, 262149, 0, 1, 262150, 0, 1, 262151, 0, 1, 262152, 0, 1, 262153, 0, 1, 262154, 0, 1, 262155, 0, 1, 262156, 0, 1, 262157, 0, 1, 262158, 0, 1, 262159, 0, 1, 262160, 0, 65541, 262169, 0, 65538, 327680, 0, 65536, 327705, 0, 65538, 393216, 0, 65536, 393241, 0, 65538, 458752, 0, 65536, 458777, 0, 65538 )
 
-[node name="ObjectLayer" type="Node2D" parent="."]
-
-[node name="T_Door" parent="ObjectLayer" instance=ExtResource( 4 )]
-position = Vector2( 319, 14 )
-next_scene = "res://Levels/Level_3.tscn"
-
-[node name="RaisedFloor" parent="ObjectLayer" instance=ExtResource( 5 )]
+[node name="ObjLayer" type="Node2D" parent="."]
 position = Vector2( 368, 242 )
 
-[node name="StoneDeskH" parent="ObjectLayer" instance=ExtResource( 6 )]
+[node name="RaisedFloor" parent="ObjLayer" instance=ExtResource( 5 )]
+
+[node name="Window" parent="ObjLayer" instance=ExtResource( 7 )]
+position = Vector2( -32, -170 )
+
+[node name="T_Door" parent="ObjLayer" instance=ExtResource( 4 )]
+position = Vector2( -49, -228 )
+next_scene = "res://Levels/Level_3.tscn"
+
+[node name="P_Pad" parent="ObjLayer" instance=ExtResource( 9 )]
+position = Vector2( -208, -44 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="StoneDeskH" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 296, 104 )
 
-[node name="StoneDeskH2" parent="ObjectLayer" instance=ExtResource( 6 )]
+[node name="StoneDeskH2" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 376, 104 )
 
-[node name="Window" parent="ObjectLayer" instance=ExtResource( 7 )]
-position = Vector2( 336, 72 )
-
-[node name="StoneDeskV2" parent="ObjectLayer" instance=ExtResource( 8 )]
+[node name="StoneDeskV2" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( 160, 248 )
 
-[node name="P_Pad" parent="ObjectLayer" instance=ExtResource( 9 )]
-position = Vector2( 160, 198 )
-
-[node name="BigDesk" parent="ObjectLayer" instance=ExtResource( 10 )]
+[node name="BigDesk" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 336, 152 )
 
-[node name="Player" parent="ObjectLayer" instance=ExtResource( 11 )]
+[node name="Player" parent="YSort" instance=ExtResource( 11 )]
 position = Vector2( 48, 224 )
 
 [node name="Down" parent="." instance=ExtResource( 3 )]
