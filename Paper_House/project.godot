@@ -27,6 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Paper_House"
+config/description="GameOff 2019"
 run/main_scene="res://Levels/Start.tscn"
 config/icon="res://icon.png"
 

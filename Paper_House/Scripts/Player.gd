@@ -37,12 +37,11 @@ onready var P_col : = $P_CollisionShape2D
 onready var hint : = $Hint
 onready var sound : = $SoundAnim
 onready var snd_change : = $SwitchSoundAnim
-onready var snd_land : = $LandSoundAnim
 onready var cd : = $Timer
 onready var transition : = $Trans/Transition
 
 
-func _ready():
+func _ready() -> void:
 	anim.animation = "T_IdleDown"
 	set_physics_process(false)
 	transition.fade(false)
@@ -107,7 +106,9 @@ func get_input() -> void:
 			OS.window_fullscreen = true
 	
 	if _restart:
-		get_tree().reload_current_scene()
+		var msg = get_tree().reload_current_scene()
+		if msg != OK:
+			print(msg)
 		
 	# change genre
 	if isPlatform:
@@ -264,7 +265,7 @@ func play_animation() -> void:
 	
 	if newAnim == "P_IdleLeft" or newAnim == "P_IdleRight" or newAnim == "P_MoveRight" or newAnim == "P_MoveLeft":
 		if anim.animation == "P_FallRight" or anim.animation == "P_FallLeft":
-			snd_land.play("Land")
+			sound.play("Land")
 		
 	if anim.animation != newAnim:
 		anim.animation = newAnim
