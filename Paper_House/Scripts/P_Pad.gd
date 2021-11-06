@@ -11,13 +11,15 @@ func change(newGenre):
 			spr.play("op", false)
 		else:
 			spr.play("cl", false)
-		P_col.disabled = false
+		P_col.set_deferred("disabled", false)
+#		P_col.disabled = false
 	else: # topdown
 		if isCracked:
 			spr.play("op", true)
 		else:
 			spr.play("cl", true)
-		P_col.disabled = true
+		P_col.set_deferred("disabled", true)
+#		P_col.disabled = true
 
 func is_cracking():
 	if spr.animation != "op":

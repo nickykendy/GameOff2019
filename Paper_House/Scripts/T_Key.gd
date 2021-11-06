@@ -13,13 +13,15 @@ func change(newGenre):
 		spr.frame = 0
 		spr.playing = false
 		spr.play("default", false)
-		T_col.disabled = true
+		T_col.set_deferred("disabled", true)
+#		T_col.disabled = true
 	else: # topdown
 		spr.animation = "default"
 		spr.frame = 3
 		spr.playing = false
 		spr.play("default", true)
-		T_col.disabled = false
+		T_col.set_deferred("disabled", false)
+#		T_col.disabled = false
 
 func _on_AnimatedSprite_animation_finished():
 	if spr.animation == "default" and spr.frame == 0:

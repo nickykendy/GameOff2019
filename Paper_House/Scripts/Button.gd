@@ -12,14 +12,16 @@ func change(newGenre : bool) -> void:
 	if newGenre:
 		if !isPressed:
 			spr.play("default", false)
-		T_col.disabled = true
+		T_col.set_deferred("disabled", true)
+#		T_col.disabled = true
 	# platform
 	else:
 		if !isPressed:
 			spr.play("default", true)
 		else:
 			_release()
-		T_col.disabled = false
+		T_col.set_deferred("disabled", false)
+#		T_col.disabled = false
 
 
 func _on_Button_body_entered(body : KinematicBody2D) -> void:

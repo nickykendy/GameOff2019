@@ -32,8 +32,10 @@ func change(newGenre : bool) -> void:
 			spr.animation = "ClosedChange"
 			spr.frame = 0
 			spr.play("ClosedChange", false)
-		P_col.disabled = false
-		T_col.disabled = true
+		P_col.set_deferred("disabled", false)
+		T_col.set_deferred("disabled", true)
+#		P_col.disabled = false
+#		T_col.disabled = true
 	else: # topdown
 		if isOpen:
 			spr.animation = "OpenChange"
@@ -43,5 +45,7 @@ func change(newGenre : bool) -> void:
 			spr.animation = "ClosedChange"
 			spr.frame = 3
 			spr.play("ClosedChange", true)
-		P_col.disabled = true
-		T_col.disabled = false
+		P_col.set_deferred("disabled", true)
+		T_col.set_deferred("disabled", false)
+#		P_col.disabled = true
+#		T_col.disabled = false

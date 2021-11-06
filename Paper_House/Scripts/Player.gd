@@ -65,7 +65,6 @@ func _physics_process(delta : float) -> void:
 func to_next_scene(scene : String) -> void:
 	transition.next_scene = scene
 	transition.fade(true)
-	print(transition.next_scene)
 	set_physics_process(true)
 	
 
